@@ -6,7 +6,7 @@
  *
  * English:
  * ! Please do not change the below code, it is very important for the project.
- * It is my motivation to maintain and develop the project for free.
+ * ! It is my motivation to maintain and develop the project for free.
  * ! If you change it, you will be banned forever
  * Thank you for using
  *
@@ -27,6 +27,9 @@ const nodemailer = require("nodemailer");
 const { execSync } = require('child_process');
 const log = require('./logger/log.js');
 const path = require("path");
+
+// Safe cache/temp file cleaner
+require("./utils/cacheCleaner");
 
 process.env.BLUEBIRD_W_FORGOTTEN_RETURN = 0;
 
@@ -96,11 +99,6 @@ global.GoatBot = {
 	onReply: new Map(),
 	onReaction: new Map(),
 	onAnyEvent: [],
-	config,
-	configCommands,
-	envCommands: {},
-	envEvents: {},
-	envGlobal: {},
 	reLoginBot: function () { },
 	Listening: null,
 	oldListening: [],
@@ -288,4 +286,4 @@ function compareVersion(version1, version2) {
 		if (parseInt(v1[i]) < parseInt(v2[i])) return -1;
 	}
 	return 0;
-	}
+						}
