@@ -44,7 +44,7 @@
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
   "nickNameBot": "Aliya Official",
-  "prefix": "-",
+  "prefix": "(",
   "database": {
     "type": "mongodb",
     "uriMongodb": "mongodb+srv://putkidibosh_db_user:nGoqOx6bNb11X08E@cluster0.rcnrw9d.mongodb.net/ScriptManager?retryWrites=true&w=majority&appName=Cluster0", 
