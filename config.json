@@ -46,7 +46,7 @@
   "nickNameBot": "Aliya Official for public",
   "prefix": "-",
   "database": {
-    "type": "mogodb",
+    "type": "mongodb",
     "uriMongodb": "mongodb+srv://putkidibosh_db_user:nGoqOx6bNb11X08E@cluster0.rcnrw9d.mongodb.net/ScriptManager?retryWrites=true&w=majority&appName=Cluster0", 
     "autoSyncWhenStart": false,
     "autoRefreshThreadInfoFirstTime": true,
