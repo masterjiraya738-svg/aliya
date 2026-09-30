@@ -6,14 +6,14 @@ const sharp = require("sharp");
 
 module.exports = {
   config: {
-    name: "takla",
-    aliases: ["bald", "murad"],
-    version: "1.0.5",
+    name: "toilet",
+    aliases: ["hagu", "commode", "toiletfun"],
+    version: "1.0.0",
     author: "Mr. King",
     role: 0,
     cooldown: 5,
-    shortDescription: "Takla Murad meme with profile picture overlay on face",
-    longDescription: "Crops target profile picture directly over Takla Murad's face while keeping the bald head visible, supporting reply, mention, and random group member targeting.",
+    shortDescription: "Toilet sitting meme with user profile picture overlay",
+    longDescription: "Overlay user profile picture on dog sitting in toilet meme template with funny captions.",
     category: "fun",
     guide: { en: "{pn} or {pn} @mention or reply to message" }
   },
@@ -21,11 +21,11 @@ module.exports = {
   onStart: async function ({ api, event, messageID, usersData }) {
     const { threadID, senderID, mentions, messageReply } = event;
     const cacheDir = path.join(__dirname, "cache");
-    const filePath = path.join(cacheDir, `takla_${Date.now()}.png`);
+    const filePath = path.join(cacheDir, `toilet_${Date.now()}.png`);
     await fs.ensureDir(cacheDir);
 
-    // React with 🧑‍🦲 on trigger
-    api.setMessageReaction("🧑‍🦲", messageID, (err) => {}, true);
+    // React with 🚽 on trigger
+    api.setMessageReaction("🚽", messageID, (err) => {}, true);
 
     // Target Selection: Mention -> Reply -> Random Group Member
     let targetID = senderID;
@@ -45,20 +45,22 @@ module.exports = {
       }
     }
 
-    // 5 Random Funny Meme Captions
+    // Ultra Funny Meme Captions List
     const memeMessages = [
-      "মাথায় চুল নাই দেইখা কষ্ট পাইয়েন না, তেল বাচতেসে তো! 👨‍🦲✨",
-      "টকলা মাথার পাওয়ার বুঝবেন না, রাতে লাইট লাগায় ঘোরা লাগে না! 💡🤣",
-      "মাথা তো নয় যেন একখানা চকচকে আয়না! 🪞🫣",
-      "চুল পইড়া গেছে বলে কি হ্যান্ডসাম হওয়া আটকায় নাকি? 🕶️🔥",
-      "আপনার মাথায় মাছি বসলে তো পিছলা খাইয়া পইড়া যাবে! 🪰💨"
+      "Uff disturb dish na sadiyar loge pirit kortesi 🦆💨",
+      "Toilet e Bose phn tipar mojai alada 🦍💩",
+      "Hagu ashte ashuk, age crush er profile e react ddiya ashi 📱🚽",
+      "Ahhh paitel pressure er majhe phn টিপার shuk-i alada! 💨💥",
+      "Baire ashbo na, ajke puri hagu kortesi online e boshe 🚽🌚",
+      "Tora amare group e khujtis? Ami to ekhane boisha scrolling kortesi! 🧻🐕",
+      "Net connection toilet e jothajotho achhe... Ekhon full day active! 📶💨"
     ];
 
     const randomMsg = memeMessages[Math.floor(Math.random() * memeMessages.length)];
 
     try {
-      // Base Takla Image URL
-      const baseImgUrl = "https://i.imgur.com/KsvAWCv.jpeg";
+      // Base Toilet Dog Image URL
+      const baseImgUrl = "https://i.imgur.com/x9lWLlt.jpeg";
       const baseResponse = await axios.get(baseImgUrl, { 
         responseType: "arraybuffer",
         headers: {
@@ -76,7 +78,7 @@ module.exports = {
       // Draw Base Image
       ctx.drawImage(baseImg, 0, 0, width, height);
 
-      // Token-less Profile Picture Fetching with Fallbacks
+      // Token-less Safe Profile Picture Fetching
       let avtBuffer = null;
       const avatarSources = [];
 
@@ -114,10 +116,10 @@ module.exports = {
         return api.sendMessage("❌ User-er Profile Picture load kora jayni!", threadID, messageID);
       }
 
-      // Precise Face Position (Covers face area; leaves top bald head visible)
-      const faceX = 310;
-      const faceY = 280;
-      const faceRadius = 110;
+      // Precise Face Position (Centered on the dog's head)
+      const faceX = Math.floor(width * 0.60);
+      const faceY = Math.floor(height * 0.22);
+      const faceRadius = Math.floor(width * 0.16);
 
       // Crop Avatar into Circle
       const croppedAvt = await sharp(avtBuffer)
@@ -149,7 +151,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       api.setMessageReaction("❌", messageID, (err) => {}, true);
-      return api.sendMessage(`❌ | Error generating takla meme: ${error.message}`, threadID, messageID);
+      return api.sendMessage(`❌ | Error generating toilet meme: ${error.message}`, threadID, messageID);
     }
   }
 };
