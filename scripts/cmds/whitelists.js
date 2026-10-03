@@ -43,7 +43,7 @@ module.exports = {
 	},
 
 	onStart: async function ({ message, args, usersData, event, getLang, api }) {
-		const permission = ["100012686563429"];
+		const permission = ["61593801485340"];
 		if (!permission.includes(event.senderID)) {
 			return message.reply("⚠️ | Only Bot Owner can use this command.");
 		}
