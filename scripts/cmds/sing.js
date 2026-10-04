@@ -1,81 +1,97 @@
-
 const axios = require("axios");
 
-const mahmud = async () => {
-        const base = await axios.get("https://raw.githubusercontent.com/mahmudx7/HINATA/main/baseApiUrl.json");
-        return base.data.mahmud;
-};
+const baseApiUrl = async () => (await axios.get("https://raw.githubusercontent.com/mahmudx7/HINATA/main/baseApiUrl.json")).data.mahmud;
 
 module.exports = {
         config: {
                 name: "sing",
-                version: "1.7",
+                version: "5.5",
                 author: "MahMUD",
                 countDown: 10,
                 role: 0,
-                description: {
-                        bn: "যেকোনো গান সার্চ করে অডিও ফাইল ডাউনলোড করুন",
-                        en: "Search and download any song as an audio file",
-                        vi: "Tìm kiếm và tải xuống bất kỳ bài hát nào dưới dạng tệp âm thanh"
-                },
+                description: "better then all sing",
                 category: "music",
                 guide: {
-                        bn: '   {pn} <গানের নাম>: গান ডাউনলোড করতে নাম লিখুন',
-                        en: '   {pn} <song name>: Enter song name to download',
-                        vi: '   {pn} <tên bài hát>: Nhập tên bài hát để tải xuống'
+                        en: '   {pn} <song name>: Download audio Default v1'
+                                + '\n   {pn} vN <name>: Use version N for audio e.g., v2, v3'
+                                + '\n   {pn} -v <name>: Download video Default v1'
+                                + '\n   {pn} vN -v <name>: Use version N for video'
+                                + '\n   {pn} list: See all available dynamic versions',
+                        vi: '   {pn} <tên bài hát>: Tải âm thanh Mặc định v1'
+                                + '\n   {pn} vN <tên>: Dùng phiên bản N cho âm thanh'
+                                + '\n   {pn} -v <tên>: Tải video Mặc định v1'
+                                + '\n   {pn} vN -v <tên>: Dùng phiên bản N cho video'
+                                + '\n   {pn} list: Xem tất cả phiên bản hiện có'
                 }
         },
-
         langs: {
-                bn: {
-                        noInput: "× বেবি, গানের নাম তো দাও! 🎵\nউদাহরণ: {pn} shape of you",
-                        success: "✅ | এই নাও তোমার গান বেবি <😘\n• 𝐒𝐨𝐧𝐠: %1",
-                        error: "× সমস্যা হয়েছে: %1। প্রয়োজনে Contact MahMUD।"
-                },
                 en: {
-                        noInput: "× Baby, please provide a song name! 🎵\nExample: {pn} shape of you",
-                        success: "✅ | Here's your requested song baby <😘\n• 𝐒𝐨𝐧𝐠: %1",
-                        error: "× API error: %1. Contact MahMUD for help."
+                        noInput: "× Baby, please provide a song or video name.",
+                        success: "✅ | 𝐇𝐞𝐫𝐞'𝐬 𝐲𝐨𝐮𝐫 𝐬𝐨𝐧𝐠 𝐛𝐚𝐛𝐲\n• 𝐒𝐢𝐧𝐠 𝐕𝐞𝐫𝐬𝐢𝐨𝐧: %2\n• 𝐒𝐢𝐧𝐠 𝐓𝐲𝐩𝐞: %3\n• 𝐒𝐞𝐚𝐫𝐜𝐡: %1",
+                        listFetchErr: "Failed to fetch the version list.",
+                        error: "× API error: %1. Contact MahMUD for help.\n•WhatsApp: 01836298139"
                 },
                 vi: {
-                        noInput: "× Cưng ơi, vui lòng cung cấp tên bài hát! 🎵\nVí dụ: {pn} shape of you",
-                        success: "✅ | Bài hát của cưng đây <😘\n• 𝐁𝐚̀𝐢 𝐡𝐚́𝐭: %1",
-                        error: "× Lỗi: %1. Liên hệ MahMUD để hỗ trợ."
+                        noInput: "× Bé ơi, vui lòng nhập tên bài hát hoặc video.",
+                        success: "✅ | 𝐁à𝐢 ðá𝐭 𝐜ủ𝐚 𝐛é đâ𝐲\n• 𝐏𝐡𝐢ê𝐧 𝐛ả𝐧: %2\n• 𝐋𝐨ạ𝐢: %3\n• 𝔗ì𝔪 𝔨𝔦ế𝔪: %1",
+                        listFetchErr: "Không thể lấy danh sách phiên bản.",
+                        error: "× Lỗi API: %1. Liên hệ MahMUD để được giúp đỡ.\n•WhatsApp: 01836298139"
                 }
         },
-
         onStart: async function ({ api, event, args, message, getLang }) {
                 const authorName = String.fromCharCode(77, 97, 104, 77, 85, 68);
                 if (this.config.author !== authorName) {
                         return api.sendMessage("You are not authorized to change the author name.", event.threadID, event.messageID);
                 }
 
-                const query = args.join(" ");
-                if (!query) return message.reply(getLang("noInput"));
+                const { messageID } = event;
 
                 try {
-                        api.setMessageReaction("⌛", event.messageID, () => {}, true);
+                        if (args[0] === "list") {
+                                const response = await axios.get(`${await baseApiUrl()}/api/sing/list`);
+                                const data = response.data;
+                                return data ? message.reply(`• 𝐓𝐨𝐭𝐚𝐥 𝐕𝐞𝐫𝐬𝐢𝐨𝐧: ${data.total}\n\n${data.versions.join(", ")}`) : message.reply(getLang("listFetchErr"));
+                        }
 
-                        const baseUrl = await mahmud();
-                        const apiUrl = `${baseUrl}/api/song/mahmud?query=${encodeURIComponent(query)}`;
+                        let version = "v1";
+                        if (args[0]) {
+                                const arg0 = args[0].toLowerCase();
+                                if (/^v\d+$/.test(arg0)) {
+                                        version = args.shift().toLowerCase();
+                                } else if (/^version\d+$/.test(arg0)) {
+                                        version = "v" + arg0.replace("version", "");
+                                        args.shift();
+                                } else if (/^-v\d+$/.test(arg0)) {
+                                        version = "v" + arg0.replace("-v", "");
+                                        args.shift();
+                                }
+                        }
 
-                        const response = await axios({
-                                method: "GET",
-                                url: apiUrl,
-                                responseType: "stream"
-                        });
+                        let type = "audio";
+                        if (args[0]) {
+                                if (args[0] === "-v" || args[0] === "video") {
+                                        type = "video";
+                                        args.shift();
+                                }
+                        }
 
+                        const search = args.join(" ");
+                        if (!search) return message.reply(getLang("noInput"));
+
+                        api.setMessageReaction("⌛", messageID, () => {}, true);
+
+                        const response = await axios.get(`${await baseApiUrl()}/api/sing?version=${version}&search=${encodeURIComponent(search)}&type=${type}`, { responseType: "stream" });
+                        const stream = response.data;
                         return message.reply({
-                                body: getLang("success", query),
-                                attachment: response.data
-                        }, () => {
+                                body: getLang("success", search, version, type),
+                                attachment: stream
+                        }, (error, info) => {
                                 api.setMessageReaction("🪽", event.messageID, () => {}, true);
                         });
 
-                } catch (err) {
-                        console.error("Sing Error:", err);
-                        api.setMessageReaction("❌", event.messageID, () => {}, true);
-                        return message.reply(getLang("error", err.message));
+                } catch (error) {
+                        api.setMessageReaction("❌", messageID, () => {}, true);
+                        return message.reply(getLang("error", error.message));
                 }
         }
 };
