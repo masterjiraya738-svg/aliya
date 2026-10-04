@@ -1,74 +1,29 @@
-const { removeHomeDir, log } = global.utils;
-
 module.exports = {
-	config: {
-		name: "eval",
-		version: "1.6",
-		author: "NTKhang",
-		countDown: 5,
-		role: 3,
-		description: {
-			vi: "Test code nhanh",
-			en: "Test code quickly"
-		},
-		category: "owner",
-		guide: {
-			vi: "{pn} <đoạn code cần test>",
-			en: "{pn} <code to test>"
-		}
-	},
+  config: {
+    name: "eval",
+    aliases: ["e"],
+    version: "1.0.0",
+    role: 2,
+    author: "Mr.king",
+    shortDescription: { en: "Execute raw JavaScript code" },
+    category: "owner",
+    guide: { en: "{pn} <javascript code>" }
+  },
 
-	langs: {
-		vi: {
-			error: "❌ Đã có lỗi xảy ra:"
-		},
-		en: {
-			error: "❌ An error occurred:"
-		}
-	},
+  onStart: async function ({ message, args, api, event, usersData, threadsData }) {
+    const code = args.join(" ");
+    if (!code) return message.reply("❌ কোনো JavaScript কোড দাওনি!");
 
-	onStart: async function ({ api, args, message, event, threadsData, usersData, dashBoardData, globalData, threadModel, userModel, dashBoardModel, globalModel, role, commandName, getLang }) {
-		function output(msg) {
-			if (typeof msg == "number" || typeof msg == "boolean" || typeof msg == "function")
-				msg = msg.toString();
-			else if (msg instanceof Map) {
-				let text = `Map(${msg.size}) `;
-				text += JSON.stringify(mapToObj(msg), null, 2);
-				msg = text;
-			}
-			else if (typeof msg == "object")
-				msg = JSON.stringify(msg, null, 2);
-			else if (typeof msg == "undefined")
-				msg = "undefined";
+    try {
+      let evaled = await eval(code);
+      if (typeof evaled !== "string") {
+        evaled = require("util").inspect(evaled, { depth: 1 });
+      }
 
-			message.reply(msg);
-		}
-		function out(msg) {
-			output(msg);
-		}
-		function mapToObj(map) {
-			const obj = {};
-			map.forEach(function (v, k) {
-				obj[k] = v;
-			});
-			return obj;
-		}
-		const cmd = `
-		(async () => {
-			try {
-				${args.join(" ")}
-			}
-			catch(err) {
-				log.err("eval command", err);
-				message.send(
-					"${getLang("error")}\\n" +
-					(err.stack ?
-						removeHomeDir(err.stack) :
-						removeHomeDir(JSON.stringify(err, null, 2) || "")
-					)
-				);
-			}
-		})()`;
-		eval(cmd);
-	}
+      if (evaled.length > 3800) evaled = evaled.slice(0, 3800) + "\n...(truncated)";
+      return message.reply(`✅ **Result:**\n\`\`\`js\n${evaled}\n\`\`\``);
+    } catch (err) {
+      return message.reply(`❌ **Error:**\n\`\`\`js\n${err.message}\n\`\`\``);
+    }
+  }
 };
