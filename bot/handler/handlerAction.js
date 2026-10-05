@@ -2,29 +2,33 @@ const createFuncMessage = global.utils.message;
 const handlerCheckDB = require("./handlerCheckData.js");
 
 module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, usersData, threadsData, dashBoardData, globalData) => {
-	const handlerEvents = require(process.env.NODE_ENV == 'development' ? "./handlerEvents.dev.js" : "./handlerEvents.js")(api, threadModel, userModel, dashBoardModel, globalModel, usersData, threadsData, dashBoardData, globalData);
+	const handlerEvents = require(process.env.NODE_ENV === 'development' ? "./handlerEvents.dev.js" : "./handlerEvents.js")(api, threadModel, userModel, dashBoardModel, globalModel, usersData, threadsData, dashBoardData, globalData);
 
 	return async function (event) {
 		// Anti-Inbox check
 		if (
-			global.GoatBot.config.antiInbox == true &&
-			(event.senderID == event.threadID || event.userID == event.senderID || event.isGroup == false) &&
-			(event.senderID || event.userID || event.isGroup == false)
-		)
+			global.GoatBot.config.antiInbox === true &&
+			(event.senderID === event.threadID || event.userID === event.senderID || event.isGroup === false) &&
+			(event.senderID || event.userID || event.isGroup === false)
+		) {
 			return;
+		}
 
 		const message = createFuncMessage(api, event);
 
 		// DB check/update
-		await handlerCheckDB(usersData, threadsData, event);
+		try {
+			await handlerCheckDB(usersData, threadsData, event);
+		} catch (err) {
+			console.error("[ CHECK_DB ERROR ]", err);
+		}
 
 		// Event handler load
 		const handlerChat = await handlerEvents(event, message);
-		if (!handlerChat)
-			return;
+		if (!handlerChat) return;
 
 		// Approval system
-		if(global.GoatBot.config?.approval){
+		if (global.GoatBot.config?.approval) {
 			const approvedtid = await globalData.get("approved", "data", {});
 			if (!approvedtid.approved) {
 				approvedtid.approved = [];
@@ -39,30 +43,36 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 			typ, presence, read_receipt
 		} = handlerChat;
 
-		// run any event
-		onAnyEvent();
+		// run any event safely
+		if (typeof onAnyEvent === "function") {
+			try {
+				await onAnyEvent();
+			} catch (err) {
+				console.error("[ ONANYEVENT ERROR ]", err);
+			}
+		}
 
 		switch (event.type) {
 			case "message":
 			case "message_reply":
 			case "message_unsend":
-				onFirstChat();
-				onChat();
-				onStart();
-				onReply();
+				if (typeof onFirstChat === "function") await onFirstChat();
+				if (typeof onChat === "function") await onChat();
+				if (typeof onStart === "function") await onStart();
+				if (typeof onReply === "function") await onReply();
 				break;
 
 			case "event":
-				handlerEvent();
-				onEvent();
+				if (typeof handlerEvent === "function") await handlerEvent();
+				if (typeof onEvent === "function") await onEvent();
 				break;
 
 			case "message_reaction":
-				onReaction();
+				if (typeof onReaction === "function") await onReaction();
 
-				const { delete: del, kick } = global.GoatBot.config?.reactBy || { delete: [], kick: [] };
+				const { delete: del = [], kick = [] } = global.GoatBot.config?.reactBy || {};
 
-				// 🗑️ Delete message
+				// Delete message
 				if (del.includes(event.reaction)) {
 					if (event.senderID === api.getCurrentUserID()) {
 						if (global.GoatBot.config?.vipuser?.includes(event.userID)) {
@@ -71,26 +81,26 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 					}
 				}
 
-				// 👟 Kick user
+				// Kick user
 				if (kick.includes(event.reaction)) {
 					if (global.GoatBot.config?.vipuser?.includes(event.userID)) {
 						api.removeUserFromGroup(event.senderID, event.threadID, (err) => { 
-							if (err) return console.log(err); 
+							if (err) console.error("[ KICK ERROR ]", err); 
 						});
 					}
 				}
 				break;
 
 			case "typ":
-				typ();
+				if (typeof typ === "function") await typ();
 				break;
 
 			case "presence":
-				presence();
+				if (typeof presence === "function") await presence();
 				break;
 
 			case "read_receipt":
-				read_receipt();
+				if (typeof read_receipt === "function") await read_receipt();
 				break;
 
 			default:
@@ -98,3 +108,4 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 		}
 	};
 };
+				
