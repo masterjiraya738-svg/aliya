@@ -5,7 +5,6 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 	const handlerEvents = require(process.env.NODE_ENV === 'development' ? "./handlerEvents.dev.js" : "./handlerEvents.js")(api, threadModel, userModel, dashBoardModel, globalModel, usersData, threadsData, dashBoardData, globalData);
 
 	return async function (event) {
-		// Anti-Inbox check
 		if (
 			global.GoatBot.config.antiInbox === true &&
 			(event.senderID === event.threadID || event.userID === event.senderID || event.isGroup === false) &&
@@ -16,18 +15,15 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 
 		const message = createFuncMessage(api, event);
 
-		// DB check/update
 		try {
 			await handlerCheckDB(usersData, threadsData, event);
 		} catch (err) {
 			console.error("[ CHECK_DB ERROR ]", err);
 		}
 
-		// Event handler load
 		const handlerChat = await handlerEvents(event, message);
 		if (!handlerChat) return;
 
-		// Approval system
 		if (global.GoatBot.config?.approval) {
 			const approvedtid = await globalData.get("approved", "data", {});
 			if (!approvedtid.approved) {
@@ -43,7 +39,6 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 			typ, presence, read_receipt
 		} = handlerChat;
 
-		// run any event safely
 		if (typeof onAnyEvent === "function") {
 			try {
 				await onAnyEvent();
@@ -72,7 +67,6 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 
 				const { delete: del = [], kick = [] } = global.GoatBot.config?.reactBy || {};
 
-				// Delete message
 				if (del.includes(event.reaction)) {
 					if (event.senderID === api.getCurrentUserID()) {
 						if (global.GoatBot.config?.vipuser?.includes(event.userID)) {
@@ -81,7 +75,6 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 					}
 				}
 
-				// Kick user
 				if (kick.includes(event.reaction)) {
 					if (global.GoatBot.config?.vipuser?.includes(event.userID)) {
 						api.removeUserFromGroup(event.senderID, event.threadID, (err) => { 
@@ -108,4 +101,4 @@ module.exports = (api, threadModel, userModel, dashBoardModel, globalModel, user
 		}
 	};
 };
-				
+					
