@@ -3,10 +3,9 @@ const { execSync } = require("child_process");
 const fs = require("fs-extra");
 const path = require("path");
 const cheerio = require("cheerio");
-const { client } = global;
 
 const { configCommands } = global.GoatBot;
-const { log, removeHomeDir } = global.utils;
+const { log } = global.utils;
 
 function getDomain(url) {
 	const regex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:/\n]+)/im;
@@ -26,12 +25,12 @@ function isURL(str) {
 module.exports = {
 	config: {
 		name: "cmd",
-		version: "3.1.0",
+		version: "3.2.0",
 		author: "NTKhang | Mr.king",
 		countDown: 2,
 		role: 4,
 		description: {
-			en: "Auto Package Installer, Command Manager & Unloader with Live Reaction"
+			en: "Auto Package Installer, Command Manager & Unloader"
 		},
 		category: "owner",
 		guide: {
@@ -50,7 +49,7 @@ module.exports = {
 			missingUrlCodeOrFileName: "⚠️ | Syntax: {pn} install <url/code> <filename.js>",
 			invalidUrl: "⚠️ | Invalid URL provided.",
 			invalidUrlOrCode: "⚠️ | Failed to extract valid code from source.",
-			alreadExist: "⚠️ | File already exists. React to overwrite.",
+			alreadExist: "⚠️ | File already exists. Reply 'yes' to overwrite.",
 			installed: "🚀 | Successfully installed \"%1\"\n📁 Saved: %2",
 			installedError: "❌ | Failed to install \"%1\"\n%2: %3"
 		}
@@ -75,10 +74,8 @@ module.exports = {
 
 			try {
 				const infoUnload = unloadScripts("cmds", fileName, configCommands, getLang);
-				api.setMessageReaction("🗑️", event.messageID, () => {}, true);
 				return message.reply(getLang("unloaded", infoUnload.name));
 			} catch (err) {
-				api.setMessageReaction("❌", event.messageID, () => {}, true);
 				return message.reply(getLang("unloadedError", fileName, err.name || "Error", err.message || err));
 			}
 		}
@@ -97,18 +94,13 @@ module.exports = {
 				url = tmp;
 			}
 
-			// Add Loading Reaction 🛜
-			api.setMessageReaction("🛜", event.messageID, (err) => {}, true);
-
 			if (url.match(/(https?:\/\/(?:www\.|(?!www)))/)) {
 				if (!fileName || !fileName.endsWith(".js")) {
-					api.setMessageReaction("❌", event.messageID, () => {}, true);
 					return message.reply(getLang("missingFileName"));
 				}
 
 				const domain = getDomain(url);
 				if (!domain) {
-					api.setMessageReaction("❌", event.messageID, () => {}, true);
 					return message.reply(getLang("invalidUrl"));
 				}
 
@@ -124,7 +116,6 @@ module.exports = {
 					const res = await axios.get(url);
 					rawCode = res.data;
 				} catch (e) {
-					api.setMessageReaction("❌", event.messageID, () => {}, true);
 					return message.reply(getLang("invalidUrlOrCode"));
 				}
 
@@ -140,22 +131,19 @@ module.exports = {
 					fileName = args[1];
 					rawCode = event.body.slice(event.body.indexOf(fileName) + fileName.length + 1);
 				} else {
-					api.setMessageReaction("❌", event.messageID, () => {}, true);
 					return message.reply(getLang("missingFileName"));
 				}
 			}
 
 			if (!rawCode) {
-				api.setMessageReaction("❌", event.messageID, () => {}, true);
 				return message.reply(getLang("invalidUrlOrCode"));
 			}
 
 			const targetPath = path.join(process.cwd(), "scripts", "cmds", fileName);
 
 			if (fs.existsSync(targetPath)) {
-				api.setMessageReaction("", event.messageID, () => {}, true);
 				return message.reply(getLang("alreadExist"), (err, info) => {
-					global.GoatBot.onReaction.set(info.messageID, {
+					global.GoatBot.onReply.set(info.messageID, {
 						commandName,
 						messageID: info.messageID,
 						type: "install",
@@ -166,10 +154,8 @@ module.exports = {
 			} else {
 				const infoLoad = await loadScripts("cmds", fileName, log, configCommands, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, getLang, rawCode, api, event.messageID);
 				if (infoLoad.status === "success") {
-					api.setMessageReaction("☃️", event.messageID, () => {}, true);
 					return message.reply(getLang("installed", infoLoad.name, `/scripts/cmds/${fileName}`));
 				} else {
-					api.setMessageReaction("❌", event.messageID, () => {}, true);
 					return message.reply(getLang("installedError", infoLoad.name, infoLoad.error.name, infoLoad.error.message));
 				}
 			}
@@ -178,18 +164,14 @@ module.exports = {
 		}
 	},
 
-	onReaction: async function ({ Reaction, message, event, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, getLang }) {
-		const { author, data: { fileName, rawCode } } = Reaction;
-		if (event.userID != author) return;
-
-		api.setMessageReaction("🛜", event.messageID, () => {}, true);
+	onReply: async function ({ Reply, message, event, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, getLang }) {
+		const { author, data: { fileName, rawCode } } = Reply;
+		if (event.senderID != author) return;
 
 		const infoLoad = await loadScripts("cmds", fileName, log, configCommands, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, getLang, rawCode, api, event.messageID);
 		if (infoLoad.status === "success") {
-			api.setMessageReaction("☃️", event.messageID, () => {}, true);
 			return message.reply(getLang("installed", infoLoad.name, `/scripts/cmds/${fileName}`));
 		} else {
-			api.setMessageReaction("❌", event.messageID, () => {}, true);
 			return message.reply(getLang("installedError", infoLoad.name, infoLoad.error.name, infoLoad.error.message));
 		}
 	}
@@ -213,7 +195,7 @@ async function loadScripts(folder, fileName, log, configCommands, api, threadMod
 
 		while ((match = regExpCheckPackage.exec(contentFile)) !== null) {
 			let pkg = match[1];
-			if (!pkg.startsWith(".") && !pkg.startsWith("/") && pkg !== "path") {
+			if (!pkg.startsWith(".") && !pkg.startsWith("/") && pkg !== "path" && pkg !== "fs" && pkg !== "child_process") {
 				pkg = pkg.startsWith('@') ? pkg.split('/').slice(0, 2).join('/') : pkg.split('/')[0];
 				packages.push(pkg);
 			}
@@ -226,7 +208,9 @@ async function loadScripts(folder, fileName, log, configCommands, api, threadMod
 					execSync(`npm install ${packageName} --save`, { stdio: "pipe" });
 				} catch (err) {
 					if (packageName === "sharp") {
-						execSync(`npm install sharp @img/sharp-wasm32 --save`, { stdio: "pipe" });
+						try {
+							execSync(`npm install sharp @img/sharp-wasm32 --save`, { stdio: "pipe" });
+						} catch (e) {}
 					}
 				}
 			}
@@ -313,5 +297,5 @@ function unloadScripts(folder, fileName, configCommands, getLang) {
 	}
 
 	return { status: "success", name: commandName };
-}
-
+						}
+					   
