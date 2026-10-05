@@ -1,57 +1,69 @@
 module.exports = {
 	config: {
 		name: "npx",
-		version: "1.0.0",
-		author: "Mr.king",
-		countDown: 3,
-		role: 3,
-		description: "Run a command with or without prefix.",
-		category: "system",
+		version: "1.0",
+		author: "NTKhang",
+		role: 2,
+		category: "config",
 		guide: {
-			en: "{pn} [command] | {pn} -r [command]"
+			en: "{pn} <cmd_name> - Toggle prefix-less mode for a specific command\n{pn} all - Enable prefix-less mode for all commands\n{pn} off - Disable prefix-less mode"
 		}
 	},
 
-	onStart: async function ({ message, args, prefix }) {
-		if (!args.length)
-			return message.reply(
-				`Usage:\n${prefix}npx slot\n${prefix}npx -r slot`
-			);
+	langs: {
+		en: {
+			turnedOff: "Turned off prefix-less mode.",
+			turnedAll: "Prefix-less mode enabled for ALL commands.",
+			addedCmd: "Prefix-less mode enabled for command: %1",
+			removedCmd: "Prefix-less mode disabled for command: %1",
+			notFound: "Command %1 not found."
+		}
+	},
 
-		const requirePrefix = args[0] === "-r";
+	onStart: async function ({ args, message, globalData, getLang }) {
+		const target = args[0]?.toLowerCase();
 
-		if (requirePrefix)
-			args.shift();
-
-		const commandName = args.shift();
-
-		if (!commandName)
-			return message.reply("❌ Command name missing.");
-
-		const command = global.GoatBot.commands.get(
-			commandName.toLowerCase()
-		);
-
-		if (!command)
-			return message.reply(`❌ Command "${commandName}" not found.`);
-
-		const fakeArgs = args;
-
-		if (!requirePrefix) {
-			await command.onStart({
-				message,
-				args: fakeArgs,
-				commandName: command.config.name,
-				prefix: ""
-			});
-			return;
+		if (!target) {
+			return message.send(this.config.guide.en.replace(/\{pn\}/g, "npx"));
 		}
 
-		await command.onStart({
-			message,
-			args: fakeArgs,
-			commandName: command.config.name,
-			prefix
-		});
+		let npxData = await globalData.get("npx_settings", "data", { mode: "none", list: [] });
+
+		if (target === "off") {
+			npxData.mode = "none";
+			npxData.list = [];
+			await globalData.set("npx_settings", npxData, "data");
+			return message.send(getLang("turnedOff"));
+		}
+
+		if (target === "all") {
+			npxData.mode = "all";
+			npxData.list = [];
+			await globalData.set("npx_settings", npxData, "data");
+			return message.send(getLang("turnedAll"));
+		}
+
+		const command = global.GoatBot.commands.get(target) || global.GoatBot.commands.get(global.GoatBot.aliases.get(target));
+		if (!command) {
+			return message.send(getLang("notFound", target));
+		}
+
+		const realCmdName = command.config.name;
+
+		if (npxData.mode !== "custom") {
+			npxData.mode = "custom";
+			npxData.list = [];
+		}
+
+		if (npxData.list.includes(realCmdName)) {
+			npxData.list = npxData.list.filter(item => item !== realCmdName);
+			await globalData.set("npx_settings", npxData, "data");
+			return message.send(getLang("removedCmd", realCmdName));
+		} else {
+			npxData.list.push(realCmdName);
+			await globalData.set("npx_settings", npxData, "data");
+			return message.send(getLang("addedCmd", realCmdName));
+		}
 	}
 };
+			
