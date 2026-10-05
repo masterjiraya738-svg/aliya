@@ -10,6 +10,10 @@ module.exports = async function (usersData, threadsData, event) {
 	// ———————————— CHECK THREAD DATA ———————————— //
 	if (threadID) {
 		try {
+			if (!global.temp.createThreadDataError) {
+				global.temp.createThreadDataError = [];
+			}
+
 			if (global.temp.createThreadDataError.includes(threadID))
 				return;
 
@@ -19,20 +23,19 @@ module.exports = async function (usersData, threadsData, event) {
 					return;
 
 				const threadData = await threadsData.create(threadID);
-				log.info("DATABASE", `New Thread: ${threadID} | ${threadData.threadName} | ${config.database.type}`);
+				log.info("DATABASE", `New Thread: ${threadID} | ${threadData?.threadName || "Unknown"} | ${config.database.type}`);
 			}
 			else {
 				await findInCreatingThreadData.promise;
 			}
 		}
 		catch (err) {
-			if (err.name != "DATA_ALREADY_EXISTS") {
+			if (err.name !== "DATA_ALREADY_EXISTS") {
 				global.temp.createThreadDataError.push(threadID);
 				log.err("DATABASE", getText("handlerCheckData", "cantCreateThread", threadID), err);
 			}
 		}
 	}
-
 
 	// ————————————— CHECK USER DATA ————————————— //
 	if (senderID) {
@@ -43,15 +46,16 @@ module.exports = async function (usersData, threadsData, event) {
 					return;
 
 				const userData = await usersData.create(senderID);
-				log.info("DATABASE", `New User: ${senderID} | ${userData.name} | ${config.database.type}`);
+				log.info("DATABASE", `New User: ${senderID} | ${userData?.name || "Unknown"} | ${config.database.type}`);
 			}
 			else {
 				await findInCreatingUserData.promise;
 			}
 		}
 		catch (err) {
-			if (err.name != "DATA_ALREADY_EXISTS")
+			if (err.name !== "DATA_ALREADY_EXISTS") {
 				log.err("DATABASE", getText("handlerCheckData", "cantCreateUser", senderID), err);
+			}
 		}
 	}
 };
