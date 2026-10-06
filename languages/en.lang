@@ -1,160 +1,160 @@
 # index.js
-Goat.newVersionDetected=🌸 𝑷𝒐𝒐𝒌𝒊𝒆! You are using version %1, latest version is %2. Please update: %3
-Goat.autoRestart1=🌸 Bot will auto restart in %1 🎀
-Goat.autoRestart2=🧸 Bot will auto restart by cron job: %1 ✨
-Goat.googleApiTokenExpired=🌷 Google API refresh token expired, please get a new token at https://developers.google.com/oauthplayground/ ✨
+Goat.newVersionDetected=🌸 𝑷𝒐𝒐𝒌𝒊𝒆! 𝒀𝒐𝒖 𝒂𝒓𝒆 𝒖𝒔𝒊𝒏𝒈 𝒗𝒆𝒓𝒔𝒊𝒐𝒏 %1, 𝒍𝒂𝒕𝒆𝒔𝒕 𝒗𝒆𝒓𝒔𝒊𝒐𝒏 𝒊𝒔 %2. 𝑷𝒍𝒆𝒂𝒔𝒆 𝒖𝒑𝒅𝒂𝒕𝒆: %3
+Goat.autoRestart1=🌸 𝑩𝒐𝒕 𝒘𝒊𝒍𝒍 𝒂𝒖𝒕𝒐 𝒓𝒆𝒔𝒕𝒂𝒓𝒕 𝒊𝒏 %1 🎀
+Goat.autoRestart2=🧸 𝑩𝒐𝒕 𝒘𝒊𝒍𝒍 𝒂𝒖𝒕𝒐 𝒓𝒆𝒔𝒕𝒂𝒓𝒕 𝒃𝒚 𝒄𝒓𝒐𝒏 𝒋𝒐𝒃: %1 ✨
+Goat.googleApiTokenExpired=🌷 𝑮𝒐𝒐𝒈𝒍𝒆 𝑨𝑷𝑰 𝒓𝒆𝒇𝒓𝒆𝒔𝒉 𝒕𝒐𝒌𝒆𝒏 𝒆𝒙𝒑𝒊𝒓𝒆𝒅, 𝒑𝒍𝒆𝒂𝒔𝒆 𝒈𝒆𝒕 𝒂 𝒏𝒆𝒘 𝒕𝒐𝒌𝒆𝒏 𝒂𝒕 https://developers.google.com/oauthplayground/ ✨
 
 # bot/login/login.js
-login.currentlyLogged=🌸 Logging in sweetie... 🧸
-login.notFoundDirAccount=🌸 Cannot find file %1 🥺
-login.loginToken=🌷 Login with access token ✨
-login.loginCookieString=🎀 Login with cookie string 🌸
-login.loginCookieNetscape=🤍 Login with cookie netscape 🧸
-login.loginCookieArray=🍨 Login with cookie array 🌷
-login.loginPassword=✨ Login with email & password... 🌸
-login.accountError=🌸 Please enter valid token/cookie format into file %7 🥺
-login.cannotFindAccount=🌸 Cannot find facebook account, please choose an option:
-login.chooseAccount=🌷 Login with email and password
-login.chooseToken=🎀 Login with token full permission
-login.chooseCookieString=✨ Login with cookie string
-login.chooseCookieArray=🧸 Login with cookie array
-login.loginWith=🌸 You chose to %1 ✨
-login.inputEmail=🌷 Please enter your email/phone:
-login.inputPassword=🎀 Please enter your password:
-login.input2FA=✨ Please enter 2FA code:
-login.inputToken=🌸 Please enter your full permission token:
-login.inputCookieString=🌷 Please enter your cookie string:
-login.inputCookieArray=🎀 Please enter your cookie array:
-login.refreshCookie=🌸 Refreshing cookie for you pookie... 🧸
-login.refreshCookieError=🥺 An error occurred when refreshing the cookie
-login.refreshCookieSuccess=✨ Refreshed cookie successfully! Restart to apply 🌷
-login.refreshCookieWarning=⚠️ Auto refresh enabled, but email/password not found in config.json 🥺
-login.tokenError=🥺 Token is invalid or expired in file %2!
-login.cookieError=🥺 Cookie is invalid or expired!
-login.loginPasswordError=🥺 Error logging in with config.json credentials!
-login.loginSuccess=🌸 Successfully logged in pookie! 💖
-login.loginError=🥺 An error occurred while signing in!
-login.openDashboardSuccess=🌷 Opened bot management page! ✨
-login.openDashboardError=🥺 Error opening bot management page!
-login.changeGbanData=🌸 DATA CHANGED, CANNOT LAUNCH BOT! 🥺
-login.errorNoti=🥺 Error retrieving message!
-login.refreshFbstateSuccess=🌸 Refreshed %1 file successfully! ✨
-login.refreshFbstateError=🥺 Error refreshing %1 file!
-login.youAreBanned=🥺 You have been banned from using Goat-Bot!
-login.checkGbanError=🥺 Error checking GBAN, try node update!
-login.gbanMessage=🥺 Banned from Goat-Bot on %1!\n» Reason: %2\n» Time: %3
-login.gbanMessageToDate=🥺 Banned from Goat-Bot on %1!\n» Reason: %2\n» Time: %3\n» To date: %4
-login.gbanAdminMessage=🌸 User %1 was banned on %2 for: %3 🥺
-login.openServerUptimeSuccess=🚀 Opened uptime server: %1 ✨
-login.openServerUptimeError=🥺 Cannot open server uptime!
-login.restartListenMessage=🌸 ListenMQTT restart enabled every %1 🧸
-login.stopRestartListenMessage=🌷 ListenMQTT restart disabled ✨
-login.restartListenMessageError=🥺 Error restarting ListenMQTT!
-login.restartListenMessage2=✨ Successfully restarted ListenMQTT! 🌸
-login.refreshCookieAfter=🎀 Refreshing cookie after %1 🌷
-login.listenMqttClose=🌸 ListenMQTT closed 🧸
-login.listenMqttCloseByUser=🌷 ListenMQTT closed by user ✨
-login.retryCheckLiveCookie=🎀 Retrying to check cookie... %1 🌸
+login.currentlyLogged=🌸 𝑳𝒐𝒈𝒈𝒊𝒏𝒈 𝒊𝒏 𝒔𝒘𝒆𝒆𝒕𝒊𝒆... 🧸
+login.notFoundDirAccount=🌸 𝑪𝒂𝒏𝒏𝒐𝒕 𝒇𝒊𝒏𝒅 𝒇𝒊𝒍𝒆 %1 🥺
+login.loginToken=🌷 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒂𝒄𝒄𝒆𝒔𝒔 𝒕𝒐𝒌𝒆𝒏 ✨
+login.loginCookieString=🎀 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒐𝒌𝒊𝒆 𝒔𝒕𝒓𝒊𝒏𝒈 🌸
+login.loginCookieNetscape=🤍 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒐𝒌𝒊𝒆 𝒏𝒆𝒕𝒔𝒄𝒂𝒑𝒆 🧸
+login.loginCookieArray=🍨 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒐𝒌𝒊𝒆 𝒂𝒓𝒓𝒂𝒚 🌷
+login.loginPassword=✨ 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒆𝒎𝒂𝒊𝒍 & 𝒑𝒂𝒔𝒔𝒘𝒐𝒓𝒅... 🌸
+login.accountError=🌸 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒗𝒂𝒍𝒊𝒅 𝒕𝒐𝒌𝒆𝒏/𝒄𝒐𝒐𝒌𝒊𝒆 𝒇𝒐𝒓𝒎𝒂𝒕 𝒊𝒏𝒕𝒐 𝒇𝒊𝒍𝒆 %7 🥺
+login.cannotFindAccount=🌸 𝑪𝒂𝒏𝒏𝒐𝒕 𝒇𝒊𝒏𝒅 𝒇𝒂𝒄𝒆𝒃𝒐𝒐𝒌 𝒂𝒄𝒄𝒐𝒖𝒏𝒕, 𝒑𝒍𝒆𝒂𝒔𝒆 𝒄𝒉𝒐𝒐𝒔𝒆 𝒂𝒏 𝒐𝒑𝒕𝒊𝒐𝒏:
+login.chooseAccount=🌷 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒆𝒎𝒂𝒊𝒍 𝒂𝒏𝒅 𝒑𝒂𝒔𝒔𝒘𝒐𝒓𝒅
+login.chooseToken=🎀 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒕𝒐𝒌𝒆𝒏 𝒇𝒖𝒍𝒍 𝒑𝒆𝒓𝒎𝒊𝒔𝒔𝒊𝒐𝒏
+login.chooseCookieString=✨ 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒐𝒌𝒊𝒆 𝒔𝒕𝒓𝒊𝒏𝒈
+login.chooseCookieArray=🧸 𝑳𝒐𝒈𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒐𝒌𝒊𝒆 𝒂𝒓𝒓𝒂𝒚
+login.loginWith=🌸 𝒀𝒐𝒖 𝒄𝒉𝒐𝒔𝒆 𝒕𝒐 %1 ✨
+login.inputEmail=🌷 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝒆𝒎𝒂𝒊𝒍/𝒑𝒉𝒐𝒏𝒆:
+login.inputPassword=🎀 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝒑𝒂𝒔𝒔𝒘𝒐𝒓𝒅:
+login.input2FA=✨ 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 2𝑭𝑨 𝒄𝒐𝒅𝒆:
+login.inputToken=🌸 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝒇𝒖𝒍𝒍 𝒑𝒆𝒓𝒎𝒊𝒔𝒔𝒊𝒐𝒏 𝒕𝒐𝒌𝒆𝒏:
+login.inputCookieString=🌷 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝒄𝒐𝒐𝒌𝒊𝒆 𝒔𝒕𝒓𝒊𝒏𝒈:
+login.inputCookieArray=🎀 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝒄𝒐𝒐𝒌𝒊𝒆 𝒂𝒓𝒓𝒂𝒚:
+login.refreshCookie=🌸 𝑹𝒆𝒇𝒓𝒆𝒔𝒉𝒊𝒏𝒈 𝒄𝒐𝒐𝒌𝒊𝒆 𝒇𝒐𝒓 𝒚𝒐𝒖 𝒑𝒐𝒐𝒌𝒊𝒆... 🧸
+login.refreshCookieError=🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒘𝒉𝒆𝒏 𝒓𝒆𝒇𝒓𝒆𝒔𝒉𝒊𝒏𝒈 𝒕𝒉𝒆 𝒄𝒐𝒐𝒌𝒊𝒆
+login.refreshCookieSuccess=✨ 𝑹𝒆𝒇𝒓𝒆𝒔𝒉𝒆𝒅 𝒄𝒐𝒐𝒌𝒊𝒆 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! 𝑹𝒆𝒔𝒕𝒂𝒓𝒕 𝒕𝒐 𝒂𝒑𝒑𝒍𝒚 🌷
+login.refreshCookieWarning=⚠️ 𝑨𝒖𝒕𝒐 𝒓𝒆𝒇𝒓𝒆𝒔𝒉 𝒆𝒏𝒂𝒃𝒍𝒆𝒅, 𝒃𝒖𝒕 𝒆𝒎𝒂𝒊𝒍/𝒑𝒂𝒔𝒔𝒘𝒐𝒓𝒅 𝒏𝒐𝒕 𝒇𝒐𝒖𝒏𝒅 𝒊𝒏 𝒄𝒐𝒏𝒇𝒊𝒈.𝒋𝒔𝒐𝒏 🥺
+login.tokenError=🥺 𝑻𝒐𝒌𝒆𝒏 𝒊𝒔 𝒊𝒏𝒗𝒂𝒍𝒊𝒅 𝒐𝒓 𝒆𝒙𝒑𝒊𝒓𝒆𝒅 𝒊𝒏 𝒇𝒊𝒍𝒆 %2!
+login.cookieError=🥺 𝑪𝒐𝒐𝒌𝒊𝒆 𝒊𝒔 𝒊𝒏𝒗𝒂𝒍𝒊𝒅 𝒐𝒓 𝒆𝒙𝒑𝒊𝒓𝒆𝒅!
+login.loginPasswordError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒍𝒐𝒈𝒈𝒊𝒏𝒈 𝒊𝒏 𝒘𝒊𝒕𝒉 𝒄𝒐𝒏𝒇𝒊𝒈.𝒋𝒔𝒐𝒏 𝒄𝒓𝒆𝒅𝒆𝒏𝒕𝒊𝒂𝒍𝒔!
+login.loginSuccess=🌸 𝑺𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚 𝒍𝒐𝒈𝒈𝒆𝒅 𝒊𝒏 𝒑𝒐𝒐𝒌𝒊𝒆! 💖
+login.loginError=🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒘𝒉𝒊𝒍𝒆 𝒔𝒊𝒈𝒏𝒊𝒏𝒈 𝒊𝒏!
+login.openDashboardSuccess=🌷 𝑶𝒑𝒆𝒏𝒆𝒅 𝒃𝒐𝒕 𝒎𝒂𝒏𝒂𝒈𝒆𝒎𝒆𝒏𝒕 𝒑𝒂𝒈𝒆! ✨
+login.openDashboardError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒐𝒑𝒆𝒏𝒊𝒏𝒈 𝒃𝒐𝒕 𝒎𝒂𝒏𝒂𝒈𝒆𝒎𝒆𝒏𝒕 𝒑𝒂𝒈𝒆!
+login.changeGbanData=🌸 𝑫𝑨𝑻𝑨 𝑪𝑯𝑨𝑵𝑮𝑬𝑫, 𝑪𝑨𝑵𝑵𝑶𝑻 𝑳𝑨𝑑𝑵𝑪𝑯 𝑩𝑶𝑻! 🥺
+login.errorNoti=🥺 𝑬𝒓𝒓𝒐𝒓 𝒓𝒆𝒕𝒓𝒊𝒆𝒗𝒊𝒏𝒈 𝒎𝒆𝒔𝒔𝒂𝒈𝒆!
+login.refreshFbstateSuccess=🌸 𝑹𝒆𝒇𝒓𝒆𝒔𝒉𝒆𝒅 %1 𝒇𝒊𝒍𝒆 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! ✨
+login.refreshFbstateError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒓𝒆𝒇𝒓𝒆𝒔𝒉𝒊𝒏𝒈 %1 𝒇𝒊𝒍𝒆!
+login.youAreBanned=🥺 𝒀𝒐𝒖 𝒉𝒂𝒗𝒆 𝒃𝒆𝒆𝒏 𝒃𝒂𝒏𝒏𝒆𝒅 𝒇𝒓𝒐𝒎 𝒖𝒔𝒊𝒏𝒈 𝑮𝒐𝒂𝒕-𝑩𝒐𝒕!
+login.checkGbanError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒄𝒉𝒆𝒄𝒌𝒊𝒏𝒈 𝑮𝑩𝑨𝑵, 𝒕𝒓𝒚 𝒏𝒐𝒅𝒆 𝒖𝒑𝒅𝒂𝒕𝒆!
+login.gbanMessage=🥺 𝑩𝒂𝒏𝒏𝒆𝒅 𝒇𝒓𝒐𝒎 𝑮𝒐𝒂𝒕-𝑩𝒐𝒕 𝒐𝒏 %1!\n» 𝑹𝒆𝒂𝒔𝒐𝒏: %2\n» 𝑻𝒊𝒎𝒆: %3
+login.gbanMessageToDate=🥺 𝑩𝒂𝒏𝒏𝒆𝒅 𝒇𝒓𝒐𝒎 𝑮𝒐𝒂𝒕-𝑩𝒐𝒕 𝒐𝒏 %1!\n» 𝑹𝒆𝒂𝒔𝒐𝒏: %2\n» 𝑻𝒊𝒎𝒆: %3\n» 𝑻𝒐 𝒅𝒂𝒕𝒆: %4
+login.gbanAdminMessage=🌸 𝑼𝒔𝒆𝒓 %1 𝒘𝒂𝒔 𝒃𝒂𝒏𝒏𝒆𝒅 𝒐𝒏 %2 𝒇𝒐𝒓: %3 🥺
+login.openServerUptimeSuccess=🚀 𝑶𝒑𝒆𝒏𝒆𝒅 𝒖𝒑𝒕𝒊𝒎𝒆 𝒔𝒆𝒓𝒗𝒆𝒓: %1 ✨
+login.openServerUptimeError=🥺 𝑪𝒂𝒏𝒏𝒐𝒕 𝒐𝒑𝒆𝒏 𝒔𝒆𝒓𝒗𝒆𝒓 𝒖𝒑𝒕𝒊𝒎𝒆!
+login.restartListenMessage=🌸 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻 𝒓𝒆𝒔𝒕𝒂𝒓𝒕 𝒆𝒏𝒂𝒃𝒍𝒆𝒅 𝒆𝒗𝒆𝒓𝒚 %1 🧸
+login.stopRestartListenMessage=🌷 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻 𝒓𝒆𝒔𝒕𝒂𝒓𝒕 𝒅𝒊𝒔𝒂𝒃𝒍𝒆𝒅 ✨
+login.restartListenMessageError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒓𝒆𝒔𝒕𝒂𝒓𝒕𝒊𝒏𝒈 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻!
+login.restartListenMessage2=✨ 𝑺𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚 𝒓𝒆𝒔𝒕𝒂𝒓𝒕𝒆𝒅 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻! 🌸
+login.refreshCookieAfter=🎀 𝑹𝒆𝒇𝒓𝒆𝒔𝒉𝒊𝒏𝒈 𝒄𝒐𝒐𝒌𝒊𝒆 𝒂𝒇𝒕𝒆𝒓 %1 🌷
+login.listenMqttClose=🌸 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻 𝒄𝒍𝒐𝒔𝒆𝒅 🧸
+login.listenMqttCloseByUser=🌷 𝑳𝒊𝒔𝒕𝒆𝒏𝑴𝑼𝑻𝑻 𝒄𝒍𝒐𝒔𝒆𝒅 𝒃𝒚 𝒖𝒔𝒆𝒓 ✨
+login.retryCheckLiveCookie=🎀 𝑹𝒆𝒕𝒓𝒚𝒊𝒏𝒈 𝒕𝒐 𝒄𝒉𝒆𝒄𝒌 𝒄𝒐𝒐𝒌𝒊𝒆... %1 🌸
 login.startBotSuccess=🌸 𝑷𝒐𝒐𝒌𝒊𝒆 𝑩𝒐𝒕 𝒊𝒔 𝑵𝒐𝒘 𝑨𝒄𝒕𝒊𝒗𝒆 & 𝑹𝒆𝒂𝒅𝒚! 💖✨
 
-version.tooOldVersion=🌸 Your bot version is too old! Please update using: %1 🌷
+version.tooOldVersion=🌸 𝒀𝒐𝒖𝒓 𝒃𝒐𝒕 𝒗𝒆𝒓𝒔𝒊𝒐𝒏 𝒊𝒔 𝒕𝒐𝒐 𝒐𝒍𝒅! 𝑷𝒍𝒆𝒂𝒔𝒆 𝒖𝒑𝒅𝒂𝒕𝒆 𝒖𝒔𝒊𝒏𝒈: %1 🌷
 
 # bot/custom.js
-custom.refreshedFb_dtsg=🌸 Refreshed fb_dtsg and jazoest successfully! ✨
-custom.refreshedFb_dtsgError=🥺 Error refreshing fb_dtsg and jazoest!
+custom.refreshedFb_dtsg=🌸 𝑹𝒆𝒇𝒓𝒆𝒔𝒉𝒆𝒅 𝒇𝒃_𝒅𝒕𝒔𝒈 𝒂𝒏𝒅 𝒋𝒂𝒛𝒐𝒆𝒔𝒕 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! ✨
+custom.refreshedFb_dtsgError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒓𝒆𝒇𝒓𝒆𝒔𝒉𝒊𝒏𝒈 𝒇𝒃_𝒅𝒕𝒔𝒈 𝒂𝒏𝒅 𝒋𝒂𝒛𝒐𝒆𝒔𝒕!
 
 # bot/login/loadData.js
-loadData.loadThreadDataSuccess=🌸 Loaded %1 group data successfully! 🌷
-loadData.loadUserDataSuccess=🎀 Loaded %1 user data successfully! ✨
-loadData.refreshingThreadData=🧸 Updating group information... 🌸
-loadData.refreshThreadDataSuccess=✨ Updated %1 group details! 🌷
-loadData.refreshThreadDataError=🥺 Error updating group information!
+loadData.loadThreadDataSuccess=🌸 𝑳𝒐𝒂𝒅𝒆𝒅 %1 𝒈𝒓𝒐𝒖𝒑 𝒅𝒂𝒕𝒂 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! 🌷
+loadData.loadUserDataSuccess=🎀 𝑳𝒐𝒂𝒅𝒆𝒅 %1 𝒖𝒔𝒆𝒓 𝒅𝒂𝒕𝒂 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! ✨
+loadData.refreshingThreadData=🧸 𝑼𝒑𝒅𝒂𝒕𝒊𝒏𝒈 𝒈𝒓𝒐𝒖𝒑 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒕𝒊𝒐𝒏... 🌸
+loadData.refreshThreadDataSuccess=✨ 𝑼𝒑𝒅𝒂𝒕𝒆𝒅 %1 𝒈𝒓𝒐𝒖𝒑 𝒅𝒆𝒕𝒂𝒊𝒍𝒔! 🌷
+loadData.refreshThreadDataError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒖𝒑𝒅𝒂𝒕𝒊𝒏𝒈 𝒈𝒓𝒐𝒖𝒑 𝒊𝒏𝒇𝒐𝒓𝒎𝒂𝒕𝒊𝒐𝒏!
 
 # bot/login/loadScripts.js
-loadScripts.loadScriptsError=🥺 %1 files had errors during loading:
-loadScripts.loadScriptsNotMatchOrigin=⚠️ %1 files do not match original repository:
-loadScripts.NOT_FOUND=🌸 NOT FOUND IN ORIGINAL SOURCE:
-loadScripts.NOT_MATCH=🌷 DOES NOT MATCH ORIGINAL SOURCE:
+loadScripts.loadScriptsError=🥺 %1 𝒇𝒊𝒍𝒆𝒔 𝒉𝒂𝒅 𝒆𝒓𝒓𝒐𝒓𝒔 𝒅𝒖𝒓𝒊𝒏𝒈 𝒍𝒐𝒂𝒅𝒊𝒏𝒈:
+loadScripts.loadScriptsNotMatchOrigin=⚠️️ %1 𝒇𝒊𝒍𝒆𝒔 𝒅𝒐 𝒏𝒐𝒕 𝒎𝒂𝒕𝒄𝒉 𝒐𝒓𝒊𝒈𝒊𝒏𝒂𝒍 𝒓𝒆𝒑𝒐𝒔𝒊𝒕𝒐𝒓𝒚:
+loadScripts.NOT_FOUND=🌸 𝑵𝑶𝑻 𝑭𝑶𝑼𝑵𝑫 𝑰𝑵 𝑶𝑹𝑰𝑮𝑰𝑵𝑨𝑳 𝑺𝑶𝑼𝑹𝑪𝑬:
+loadScripts.NOT_MATCH=🌷 𝑫𝑶𝑬𝑺 𝑵𝑶𝑻 𝑴𝑨𝑻𝑪𝑯 𝑶𝑹𝑰𝑮𝑰𝑵𝑨𝑳 𝑺𝑶𝑼𝑹𝑪𝑬:
 
 # bot/login/socketIO.js
-socketIO.connected=🌸 Connected to socket.io server ✨
-socketIO.error=🥺 Error connecting to socket.io server!
+socketIO.connected=🌸 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒆𝒅 𝒕𝒐 𝒔𝒐𝒄𝒌𝒆𝒕.𝒊𝒐 𝒔𝒆𝒓𝒗𝒆𝒓 ✨
+socketIO.error=🥺 𝑬𝒓𝒓𝒐𝒓 𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒏𝒈 𝒕𝒐 𝒔𝒐𝒄𝒌𝒆𝒕.𝒊𝒐 𝒔𝒆𝒓𝒗𝒆𝒓!
 
 # bot/handler/handlerCheckData.js
-handlerCheckData.cantCreateThread=🥺 Cannot write group '%1' to database!
-handlerCheckData.cantCreateUser=🥺 Cannot write user '%1' to database!
+handlerCheckData.cantCreateThread=🥺 𝑪𝒂𝒏𝒏𝒐𝒕 𝒘𝒓𝒊𝒕𝒆 𝒈𝒓𝒐𝒖𝒑 '%1' 𝒕𝒐 𝒅𝒂𝒕𝒂𝒃𝒂𝒔𝒆!
+handlerCheckData.cantCreateUser=🥺 𝑪𝒂𝒏𝒏𝒐𝒕 𝒘𝒓𝒊𝒕𝒆 𝒖𝒔𝒆𝒓 '%1' 𝒕𝒐 𝒅𝒂𝒕𝒂𝒃𝒂𝒔𝒆!
 
 # bot/handler/handlerEvents.js
-handlerEvents.userBanned=🚫 ─── 𝑩𝑨𝑵𝑵𝑬𝑫 𝑼𝑺𝑬𝑹 ─── 🌸\n╭──────────────────⬣\n│ 🥺 𝐘𝐨𝐮 𝐚𝐫𝐞 𝐛𝐚𝐧𝐧𝐞𝐝 𝐟𝐫𝐨𝐦 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭\n│ 📌 𝐑𝐞𝐚𝐬𝐨𝐧: %1\n│ ⏰ 𝐓𝐢𝐦𝐞: %2\n│ 👤 𝐔𝐈𝐃: %3\n╰──────────────────⬣
-handlerEvents.threadBanned=🚫 ─── 𝑩𝑨𝑵𝑵𝑬𝑫 𝑮𝒅𝑶𝑼𝒅 ─── 🌷\n╭──────────────────⬣\n│ 🥺 𝐓𝐡𝐢𝐬 𝐠𝐫𝐨𝐮𝐩 𝐢𝐬 𝐛𝐚𝐧𝐧𝐞𝐝\n│ 📌 𝐑𝐞𝐚𝐬𝐨𝐧: %1\n│ ⏰ 𝐓𝐢𝐦𝐞: %2\n│ 🏠 𝐓𝐈𝐃: %3\n╰──────────────────⬣
-handlerEvents.onlyAdminBox=🔒 🌸 𝐓𝐡𝐢𝐬 𝐠𝐫𝐨𝐮𝐩 𝐢𝐬 𝐜𝐮𝐫𝐫𝐞𝐧𝐭𝐥𝐲 𝐥𝐨𝐜𝐤𝐞𝐝 𝐟𝐨𝐫 𝐆𝐫𝐨𝐮𝐩 𝐀𝐝𝐦𝐢𝐧𝐬 𝐨𝐧𝐥𝐲! 🎀
-handlerEvents.onlyAdminBot=👑 🌸 𝐂𝐮𝐫𝐫𝐞𝐧𝐭𝐥𝐲 𝐨𝐧𝐥𝐲 𝐁𝐨𝐭 𝐀𝐝𝐦𝐢𝐧𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭! ✨
-handlerEvents.onlyDeveloperGlobal=⚙️ 🌷 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭! 🧸
-handlerEvents.onlyVipUserGlobal=💎 🎀 𝐎𝐧𝐥𝐲 𝐕𝐈𝐏 𝐔𝐬𝐞𝐫𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 𝐭𝐡𝐢𝐬 𝐛𝐨𝐭! ✨
-handlerEvents.commandNotFound=🌸 ─── 𝑵𝑶𝑻 𝑭𝑶𝑼𝑵𝑫 ─── 🌷\n╭──────────────────⬣\n│ ❌ 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 "%1" 𝐝𝐨𝐞𝐬 𝐧𝐨𝐭 𝐞𝐱𝐢𝐬𝐭!\n│ 💡 𝐓𝐲𝐩𝐞 %2𝐡𝐞𝐥𝐩 𝐭𝐨 𝐬𝐞𝐞 𝐚𝐥𝐥 𝐜𝐨𝐦𝐦𝐚𝐧𝐝𝐬 ✨\n╰──────────────────⬣
-handlerEvents.commandNotFound2=🌸 ─── 𝑵𝑶𝑻 𝑭𝑶𝑼𝑵𝑫 ─── 🌷\n╭──────────────────⬣\n│ ❌ 𝐈𝐧𝐯𝐚𝐥𝐢𝐝 𝐜𝐨𝐦𝐦𝐚𝐧𝐝 𝐮𝐬𝐞𝐝!\n│ 💡 𝐓𝐲𝐩𝐞 %1𝐡𝐞𝐥𝐩 𝐭𝐨 𝐬𝐞𝐞 𝐚𝐥𝐥 𝐜𝐨𝐦𝐦𝐚𝐧𝐝𝐬 ✨\n╰──────────────────⬣
-handlerEvents.commandNotFoundSuggestion=🧐 🌸 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐧𝐨𝐭 𝐟𝐨𝐮𝐧𝐝!\n\n💖 𝐃𝐢𝐝 𝐲𝐨𝐮 𝐦𝐞𝐚𝐧: %2%1 ?
-handlerEvents.commandSyntaxError=⚠️ 🌸 𝐖𝐫𝐨𝐧𝐠 𝐬𝐲𝐧𝐭𝐚𝐱! 𝐓𝐲𝐩𝐞 %1𝐡𝐞𝐥𝐩 %2 𝐟𝐨𝐫 𝐠𝐮𝐢𝐝𝐞 🌷
-handlerEvents.onlyAdmin=❌ 🌸 𝐎𝐧𝐥𝐲 𝐆𝐫𝐨𝐮𝐩 𝐀𝐝𝐦𝐢𝐧𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 "%1" 🎀
-handlerEvents.onlyAdminToUseOnReply=❌ 🌸 𝐎𝐧𝐥𝐲 𝐆𝐫𝐨𝐮𝐩 𝐀𝐝𝐦𝐢𝐧𝐬 𝐜𝐚𝐧 𝐫𝐞𝐩𝐥𝐲 𝐭𝐨 "%1" 🌷
-handlerEvents.onlyAdminToUseOnReaction=❌ 🌸 𝐎𝐧𝐥𝐲 𝐆𝐫𝐨𝐮𝐩 𝐀𝐝𝐦𝐢𝐧𝐬 𝐜𝐚𝐧 𝐫𝐞𝐚𝐜𝐭 𝐭𝐨 "%1" ✨
-handlerEvents.onlyAdminBot2=💫 🌸 𝐎𝐧𝐥𝐲 𝐕𝐈𝐏 𝐔𝐬𝐞𝐫𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 "%1" 🧸
-handlerEvents.onlyAdminBot2ToUseOnReply=💫 🌸 𝐎𝐧𝐥𝐲 𝐕𝐈𝐏 𝐔𝐬𝐞𝐫𝐬 𝐜𝐚𝐧 𝐫𝐞𝐩𝐥𝐲 𝐭𝐨 "%1" 🌷
-handlerEvents.onlyAdminBot2ToUseOnReaction=💫 🌸 𝐎𝐧𝐥𝐲 𝐕𝐈𝐏 𝐔𝐬𝐞𝐫𝐬 𝐜𝐚𝐧 𝐫𝐞𝐚𝐜𝐭 𝐭𝐨 "%1" ✨
-handlerEvents.onlyDeveloper=⚙️ 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐜𝐚𝐧 𝐮𝐬𝐞 "%1" 🎀
-handlerEvents.onlyDeveloperToUseOnReply=⚙️ 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐜𝐚𝐧 𝐫𝐞𝐩𝐥𝐲 𝐭𝐨 "%1" 🌷
-handlerEvents.onlyDeveloperToUseOnReaction=⚙️ 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐜𝐚𝐧 𝐫𝐞𝐚𝐜𝐭 𝐭𝐨 "%1" ✨
-handlerEvents.onlyVipUser=💎 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐀𝐝𝐦𝐢𝐧/𝐃𝐞𝐯 𝐜𝐚𝐧 𝐮𝐬𝐞 "%1" 🧸
-handlerEvents.onlyVipUserToUseOnReply=💎 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐀𝐝𝐦𝐢𝐧/𝐃𝐞𝐯 𝐜𝐚𝐧 𝐫𝐞𝐩𝐥𝐲 𝐭𝐨 "%1" 🌷
-handlerEvents.onlyVipUserToUseOnReaction=💎 🌸 𝐎𝐧𝐥𝐲 𝐁𝐨𝐭 𝐀𝐝𝐦𝐢𝐧/𝐃𝐞𝐯 𝐜𝐚𝐧 𝐫𝐞𝐚𝐜𝐭 𝐭𝐨 "%1" ✨
-handlerEvents.waitingForCommand=⏱ 🌸 𝑷𝒐𝒐𝒌𝒊𝒆 𝑷𝒍𝒆𝒂𝒔𝒆 𝑾𝒂𝒊𝒕! Wait %1s before using this again 🎀
-handlerEvents.errorOccurred=❌ [ %1 ]\n🥺 An error occurred at command "%2":\n\n%3
-handlerEvents.errorOccurred2=❌ [ %1 ]\n🥺 An error occurred at onChat in "%2":\n\n%3
-handlerEvents.errorOccurred3=❌ [ %1 ]\n🥺 An error occurred at onReply in "%2":\n\n%3
-handlerEvents.errorOccurred4=❌ [ %1 ]\n🥺 An error occurred at onReaction in "%2":\n\n%3
-handlerEvents.errorOccurred5=❌ [ %1 ]\n🥺 An error occurred at onEvent in "%2":\n\n%3
-handlerEvents.errorOccurred6=❌ [ %1 ]\n🥺 An error occurred at onEvent in "%2":\n\n%3
-handlerEvents.errorOccurred7=❌ [ %1 ]\n🥺 An error occurred at onAnyEvent in "%2":\n\n%3
-handlerEvents.cannotFindCommandName=❌ 🌸 Cannot find command name for reply! 🥺
-handlerEvents.cannotFindCommand=❌ 🌸 Cannot find command "%1" for reply! 🥺
+handlerEvents.userBanned=🚫 ─── 𝑩𝑨𝑵𝑵𝑬𝑫 𝑼𝑺𝑬𝑹 ─── 🌸\n╭──────────────────⬣\n│ 🥺 𝒀𝒐𝒖 𝒂𝒓𝒆 𝒃𝒂𝒏𝒏𝒆𝒅 𝒇𝒓𝒐𝒎 𝒕𝒉𝒊𝒔 𝒃𝒐𝒕\n│ 📌 𝑹𝒆𝒂𝒔𝒐𝒏: %1\n│ ⏰ 𝑻𝒊𝒎𝒆: %2\n│ 👤 𝑼𝑰𝑫: %3\n╰──────────────────⬣
+handlerEvents.threadBanned=🚫 ─── 𝑩𝑨𝑵𝑵𝑬𝑫 𝑮𝑑𝑶𝑼𝑷 ─── 🌷\n╭──────────────────⬣\n│ 🥺 𝑻𝒉𝒊𝒔 𝒈𝒓𝒐𝒖𝒑 𝒊𝒔 𝒃𝒂𝒏𝒏𝒆𝒅\n│ 📌 𝑹𝒆𝒂𝒔𝒐𝒏: %1\n│ ⏰ 𝑻𝒊𝒎𝒆: %2\n│ 🏠 𝑻𝑰𝑫: %3\n╰──────────────────⬣
+handlerEvents.onlyAdminBox=🔒 🌸 𝑻𝒉𝒊𝒔 𝒈𝒓𝒐𝒖𝒑 𝒊𝒔 𝒄𝒖𝒓𝒓𝒆𝒏𝒕𝒍𝒚 𝒍𝒐𝒄𝒌𝒆𝒅 𝒇𝒐𝒓 𝑮𝒓𝒐𝒖𝒑 𝑨𝒅𝒎𝒊𝒏𝒔 𝒐𝒏𝒍𝒚! 🎀
+handlerEvents.onlyAdminBot=👑 🌸 𝑪𝒖𝒓𝒓𝒆𝒏𝒕𝒍𝒚 𝒐𝒏𝒍𝒚 𝑩𝒐𝒕 𝑨𝒅𝒎𝒊𝒏𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 𝒕𝒉𝒊𝒔 𝒃𝒐𝒕! ✨
+handlerEvents.onlyDeveloperGlobal=⚙️ 🌷 𝑶𝒏𝒍𝒚 𝑩𝒐𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 𝒕𝒉𝒊𝒔 𝒃𝒐𝒕! 🧸
+handlerEvents.onlyVipUserGlobal=💎 🎀 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 𝒕𝒉𝒊𝒔 𝒃𝒐𝒕! ✨
+handlerEvents.commandNotFound=🌸 ─── 𝑵𝑶𝑻 𝑭𝑶𝑼𝑵𝑫 ─── 🌷\n╭──────────────────⬣\n│ ❌ 𝑪𝒐𝒎𝒎𝒂𝒏𝒅 "%1" 𝒅𝒐𝒆𝒔 𝒏𝒐𝒕 𝒆𝒙𝒊𝒔𝒕!\n│ 💡 𝑻𝒚𝒑𝒆 %2𝒉𝒆𝒍𝒑 𝒕𝒐 𝒔𝒆𝒆 𝒂𝒍𝒍 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔 ✨\n╰──────────────────⬣
+handlerEvents.commandNotFound2=🌸 ─── 𝑵𝑶𝑻 𝑭𝑶𝑼𝑵𝑫 ─── 🌷\n╭──────────────────⬣\n│ ❌ 𝑰𝒏𝒗𝒂𝒍𝒊𝒅 𝒄𝒐𝒎𝒎𝒂𝒏𝒅 𝒖𝒔𝒆𝒅!\n│ 💡 𝑻𝒚𝒑𝒆 %1𝒉𝒆𝒍𝒑 𝒕𝒐 𝒔𝒆𝒆 𝒂𝒍𝒍 𝒄𝒐𝒎𝒎𝒂𝒏𝒅𝒔 ✨\n╰──────────────────⬣
+handlerEvents.commandNotFoundSuggestion=🧐 🌸 𝑪𝒐𝒎𝒎𝒂𝒏𝒅 𝒏𝒐𝒕 𝒇𝒐𝒖𝒏𝒅!\n\n💖 𝑫𝒊𝒅 𝒚𝒐𝒖 𝒎𝒆𝒂𝒏: %2%1 ?
+handlerEvents.commandSyntaxError=⚠️ 🌸 𝑾𝒓𝒐𝒏𝒈 𝒔𝒚𝒏𝒕𝒂𝒙! 𝑻𝒚𝒑𝒆 %1𝒉𝒆𝒍𝒑 %2 𝒇𝒐𝒓 𝒈𝒖𝒊𝒅𝒆 🌷
+handlerEvents.onlyAdmin=❌ 🌸 𝑶𝒏𝒍𝒚 𝑮𝒓𝒐𝒖𝒑 𝑨𝒅𝒎𝒊𝒏𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 "%1" 🎀
+handlerEvents.onlyAdminToUseOnReply=❌ 🌸 𝑶𝒏𝒍𝒚 𝑮𝒓𝒐𝒖𝒑 𝑨𝒅𝒎𝒊𝒏𝒔 𝒄𝒂𝒏 𝒓𝒆𝒑𝒍𝒚 𝒕𝒐 "%1" 🌷
+handlerEvents.onlyAdminToUseOnReaction=❌ 🌸 𝑶𝒏𝒍𝒚 𝑮𝒓𝒐𝒖𝒑 𝑨𝒅𝒎𝒊𝒏𝒔 𝒄𝒂𝒏 𝒓𝒆𝒂𝒄𝒕 𝒕𝒐 "%1" ✨
+handlerEvents.onlyAdminBot2=💫 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 "%1" 🧸
+handlerEvents.onlyAdminBot2ToUseOnReply=💫 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒑𝒍𝒚 𝒕𝒐 "%1" 🌷
+handlerEvents.onlyAdminBot2ToUseOnReaction=💫 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒂𝒄𝒕 𝒕𝒐 "%1" ✨
+handlerEvents.onlyDeveloper=⚙️ 🌸 𝑶𝒏𝒍𝒚 𝑩𝒐𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 "%1" 🎀
+handlerEvents.onlyDeveloperToUseOnReply=⚙️ 🌸 𝑶𝒏𝒍𝒚 𝑩𝒐𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒑𝒍𝒚 𝒕𝒐 "%1" 🌷
+handlerEvents.onlyDeveloperToUseOnReaction=⚙️ 🌸 𝑶𝒏𝒍𝒚 𝑩𝒐𝒕 𝑫𝒆𝒗𝒆𝒍𝒐𝒑𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒂𝒄𝒕 𝒕𝒐 "%1" ✨
+handlerEvents.onlyVipUser=💎 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒖𝒔𝒆 "%1" 🧸
+handlerEvents.onlyVipUserToUseOnReply=💎 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒑𝒍𝒚 𝒕𝒐 "%1" 🌷
+handlerEvents.onlyVipUserToUseOnReaction=💎 🌸 𝑶𝒏𝒍𝒚 𝑽𝑰𝑑 𝑼𝒔𝒆𝒓𝒔 𝒄𝒂𝒏 𝒓𝒆𝒂𝒄𝒕 𝒕𝒐 "%1" ✨
+handlerEvents.waitingForCommand=⏱ 🌸 𝑷𝒐𝒐𝒌𝒊𝒆 𝑷𝒍𝒆𝒂𝒔𝒆 𝑾𝒂𝒊𝒕! 𝑾𝒂𝒊𝒕 %1𝒔 𝒃𝒆𝒇𝒐𝒓𝒆 𝒖𝒔𝒊𝒏𝒈 𝒕𝒉𝒊𝒔 𝒂𝒈𝒂𝒊𝒏 🎀
+handlerEvents.errorOccurred=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒄𝒐𝒎𝒎𝒂𝒏𝒅 "%2":\n\n%3
+handlerEvents.errorOccurred2=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑪𝒉𝒂𝒕 𝒊𝒏 "%2":\n\n%3
+handlerEvents.errorOccurred3=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑑𝒆𝒑𝒍𝒚 𝒊𝒏 "%2":\n\n%3
+handlerEvents.errorOccurred4=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑑𝒆𝒂𝒄𝒕𝒊𝒐𝒏 𝒊𝒏 "%2":\n\n%3
+handlerEvents.errorOccurred5=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑬𝒗𝒆𝒏𝒕 𝒊𝒏 "%2":\n\n%3
+handlerEvents.errorOccurred6=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑬𝒗𝒆𝒏𝒕 𝒊𝒏 "%2":\n\n%3
+handlerEvents.errorOccurred7=❌ [ %1 ]\n🥺 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒂𝒕 𝒐𝒏𝑨𝒏𝒚𝑬𝒗𝒆𝒏𝒕 𝒊𝒏 "%2":\n\n%3
+handlerEvents.cannotFindCommandName=❌ 🌸 𝑪𝒂𝒏𝒏𝒐𝒕 𝒇𝒊𝒏𝒅 𝒄𝒐𝒎𝒎𝒂𝒏𝒅 𝒏𝒂𝒎𝒆 𝒇𝒐𝒓 𝒓𝒆𝒑𝒍𝒚! 🥺
+handlerEvents.cannotFindCommand=❌ 🌸 𝑪𝒂𝒏𝒏𝒐𝒕 𝒇𝒊𝒏𝒅 𝒄𝒐𝒎𝒎𝒂𝒏𝒅 "%1" 𝒇𝒐𝒓 𝒓𝒆𝒑𝒍𝒚! 🥺
 
 # bot/autoUptime.js
-autoUptime.autoUptimeTurnedOn=🌸 AutoUptime mode activated! ✨
+autoUptime.autoUptimeTurnedOn=🌸 𝑨𝒖𝒕𝒐𝑼𝒑𝒕𝒊𝒎𝒆 𝒎𝒐𝒅𝒆 𝒂𝒄𝒕𝒊𝒗𝒂𝒕𝒆𝒅! ✨
 
 # database/controller/index.js
-indexController.connectingMongoDB=🌸 Connecting to MongoDB Database... 🧸
-indexController.connectMongoDBSuccess=✨ Connected MongoDB Database successfully! 🌸
-indexController.connectMongoDBError=🥺 Error connecting to MongoDB database:
-indexController.connectingMySQL=🌸 Connecting to SQLite Database... 🧸
-indexController.connectMySQLSuccess=✨ Connected SQLite Database successfully! 🌸
-indexController.connectMySQLError=🥺 Error connecting to SQLite database:
+indexController.connectingMongoDB=🌸 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒏𝒈 𝒕𝒐 𝑴𝒐𝒏𝒈𝒐𝑫𝑩 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆... 🧸
+indexController.connectMongoDBSuccess=✨ 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒆𝒅 𝑴𝒐𝒏𝒈𝒐𝑫𝑩 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! 🌸
+indexController.connectMongoDBError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒏𝒈 𝒕𝒐 𝑴𝒐𝒏𝒈𝒐𝑫𝑩 𝒅𝒂𝒕𝒂𝒃𝒂𝒔𝒆:
+indexController.connectingMySQL=🌸 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒏𝒈 𝒕𝒐 𝑺𝑼𝑳𝒊𝒕𝒆 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆... 🧸
+indexController.connectMySQLSuccess=✨ 𝑪𝒐𝒏𝒏𝒆𝒄𝒕𝒆𝒅 𝑺𝑼𝑳𝒊𝒕𝒆 𝑫𝒂𝒕𝒂𝒃𝒂𝒔𝒆 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! 🌸
+indexController.connectMySQLError=🥺 𝑬𝒓𝒓𝒐𝒓 𝒄𝒐𝒏𝒏𝒆𝒄𝒕𝒊𝒏𝒈 𝒕𝒐 𝑺𝑼𝑳𝒊𝒕𝒆 𝒅𝒂𝒕𝒂𝒃𝒂𝒔𝒆:
 
 # updater.js
-updater.updateTooFast=🌸 Please wait %1m %2s before trying to update again pookie! 🎀
-updater.latestVersion=🌸 You are using the latest version sweetie! ✨
-updater.cantFindVersion=🥺 Undefined version (%1) in package.json!
-updater.newVersions=✨ Found %1 new updates! Starting update process... 🌸
-updater.updateSuccess=🌸 Updated successfully%1 💖
-updater.configChanged=🌸 %1 was modified, check config.json! 🌷
-updater.installingPackages=🧸 Installing dependencies for bot... 🌸
-updater.installSuccess=✨ Dependencies installed! Restart bot to apply 🌷
-updater.backupSuccess=🌸 Backup saved in %1 folder ✨
-updater.restartToApply=🎀 Restart bot to apply update! 🌸
-updater.skipFile=🌷 Skipped updating %1 file due to comment %2 🌸
+updater.updateTooFast=🌸 𝑷𝒍𝒆𝒂𝒔𝒆 𝒘𝒂𝒊𝒕 %1𝒎 %2𝒔 𝒃𝒆𝒇𝒐𝒓𝒆 𝒕𝒓𝒚𝒊𝒏𝒈 𝒕𝒐 𝒖𝒑𝒅𝒂𝒕𝒆 𝒂𝒈𝒂𝒊𝒏 𝒑𝒐𝒐𝒌𝒊𝒆! 🎀
+updater.latestVersion=🌸 𝒀𝒐𝒖 𝒂𝒓𝒆 𝒖𝒔𝒊𝒏𝒈 𝒕𝒉𝒆 𝒍𝒂𝒕𝒆𝒔𝒕 𝒗𝒆𝒓𝒔𝒊𝒐𝒏 𝒔𝒘𝒆𝒆𝒕𝒊𝒆! ✨
+updater.cantFindVersion=🥺 𝑼𝒏𝒅𝒆𝒇𝒊𝒏𝒆𝒅 𝒗𝒆𝒓𝒔𝒊𝒐𝒏 (%1) 𝒊𝒏 𝒑𝒂𝒄𝒌𝒂𝒈𝒆.𝒋𝒔𝒐𝒏!
+updater.newVersions=✨ 𝑭𝒐𝒖𝒏𝒅 %1 𝒏𝒆𝒘 𝒖𝒑𝒅𝒂𝒕𝒆𝒔! 𝑺𝒕𝒂𝒓𝒕𝒊𝒏𝒈 𝒖𝒑𝒅𝒂𝒕𝒆 𝒑𝒓𝒐𝒄𝒆𝒔𝒔... 🌸
+updater.updateSuccess=🌸 𝑼𝒑𝒅𝒂𝒕𝒆𝒅 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚 %1 💖
+updater.configChanged=🌸 %1 𝒘𝒂𝒔 𝒎𝒐𝒅𝒊𝒇𝒊𝒆𝒅, 𝒄𝒉𝒆𝒄𝒌 𝒄𝒐𝒏𝒇𝒊𝒈.𝒋𝒔𝒐𝒏! 🌷
+updater.installingPackages=🧸 𝑰𝒏𝒔𝒕𝒂𝒍𝒍𝒊𝒏𝒈 𝒅𝒆𝒑𝒆𝒏𝒅𝒆𝒏𝒄𝒊𝒆𝒔 𝒇𝒐𝒓 𝒃𝒐𝒕... 🌸
+updater.installSuccess=✨ 𝑫𝒆𝒑𝒆𝒏𝒅𝒆𝒏𝒄𝒊𝒆𝒔 𝒊𝒏𝒔𝒕𝒂𝒍𝒍𝒆𝒅! 𝑑𝒆𝒔𝒕𝒂𝒓𝒕 𝒃𝒐𝒕 𝒕𝒐 𝒂𝒑𝒑𝒍𝒚 🌷
+updater.backupSuccess=🌸 𝑩𝒂𝒄𝒌𝒖𝒑 𝒔𝒂𝒗𝒆𝒅 𝒊𝒏 %1 𝒇𝒐𝒍𝒅𝒆𝒓 ✨
+updater.restartToApply=🎀 𝑑𝒆𝒔𝒕𝒂𝒓𝒕 𝒃𝒐𝒕 𝒕𝒐 𝒂𝒑𝒑𝒍𝒚 𝒖𝒑𝒅𝒂𝒕𝒆! 🌸
+updater.skipFile=🌷 𝑺𝒌𝒊𝒑𝒑𝒆𝒅 𝒖𝒑𝒅𝒂𝒕𝒊𝒏𝒈 %1 𝒇𝒊𝒍𝒆 𝒅𝒖𝒆 𝒕𝒐 𝒄𝒐𝒎𝒎𝒆𝒏𝒕 %2 🌸
 
 # dashboard/routes/verifyfbid.js
-verifyfbid.sendCode=🌸 𝒀𝒐𝒖𝒓 𝑽𝒆𝒓𝒊𝒇𝒊𝒄𝒂𝒕𝒊𝒐𝒏 𝑪𝒐𝒅𝒆 🌸\n╭──────────────────⬣\n│ 🔑 𝐂𝐨𝐝𝐞 : %1\n│ ⏰ 𝐕𝐚𝐥𝐢𝐝 𝐟𝐨𝐫 : %2 minutes\n╰──────────────────⬣
+verifyfbid.sendCode=🌸 𝒀𝒐𝒖𝒓 𝑽𝒆𝒓𝒊𝒇𝒊𝒄𝒂𝒕𝒊𝒐𝒏 𝑪𝒐𝒅𝒆 🌸\n╭──────────────────⬣\n│ 🔑 𝑪𝒐𝒅𝒆 : %1\n│ ⏰ 𝑽𝒂𝒍𝒊𝒅 𝒇𝒐𝒓 : %2 𝒎𝒊𝒏𝒖𝒕𝒆𝒔\n╰──────────────────⬣
 
 # utils.js
-utils.errorOccurred=❌ 🌸 An error occurred pookie:\n\n%1
+utils.errorOccurred=❌ 🌸 𝑨𝒏 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅 𝒑𝒐𝒐𝒌𝒊𝒆:\n\n%1
 
 # for command
-command.restartedBot=🌸 𝑷𝒐𝒐𝒌𝒊𝒆 𝑩𝒐𝒕 𝑹𝒆𝒔𝒕𝒂𝒓𝒕𝒆𝒅 𝑺𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! ✨💖
+command.restartedBot=🌸 𝑷𝒐𝒐𝒌𝒊𝒆 𝑩𝒐𝒕 𝑑𝒆𝒔𝒕𝒂𝒓𝒕𝒆𝒅 𝑺𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! ✨💖
 
 # dashboard/app.js
-app.googleApiRefreshTokenExpired=🌷 Google API token expired, please get a new token! ✨
-app.tooManyRequests=🌸 Too many requests! Try again later pookie 🥺
-app.notPermissionChangeFbstate=❌ You don't have permission to change fbstate! 🥺
-app.notFoundFbstate=🌸 Please enter fbstate! 🌷
-app.changedFbstateSuccess=✨ Changed fbstate successfully! 🌸
-app.serverError=🥺 Server error occurred, please try again later!
+app.googleApiRefreshTokenExpired=🌷 𝑮𝒐𝒐𝒈𝒍𝒆 𝑨𝑷𝑰 𝒕𝒐𝒌𝒆𝒏 𝒆𝒙𝒑𝒊𝒓𝒆𝒅, 𝒑𝒍𝒆𝒂𝒔𝒆 𝒈𝒆𝒕 𝒂 𝒏𝒆𝒘 𝒕𝒐𝒌𝒆𝒏! ✨
+app.tooManyRequests=🌸 𝑻𝒐𝒐 𝒎𝒂𝒏𝒚 𝒓𝒆𝒒𝒖𝒆𝒔𝒕𝒔! 𝑻𝒓𝒚 𝒂𝒈𝒂𝒊𝒏 𝒍𝒂𝒕𝒆𝒓 𝒑𝒐𝒐𝒌𝒊𝒆 🥺
+app.notPermissionChangeFbstate=❌ 𝒀𝒐𝒖 𝒅𝒐𝒏'𝒕 𝒉𝒂𝒗𝒆 𝒑𝒆𝒓𝒎𝒊𝒔𝒔𝒊𝒐𝒏 𝒕𝒐 𝒄𝒉𝒂𝒏𝒈𝒆 𝒇𝒃𝒔𝒕𝒂𝒕𝒆! 🥺
+app.notFoundFbstate=🌸 𝑷𝒍𝒆𝒂𝒔𝒆 𝒆𝒏𝒕𝒆𝒓 𝒇𝒃𝒔𝒕𝒂𝒕𝒆! 🌷
+app.changedFbstateSuccess=✨ 𝑪𝒉𝒂𝒏𝒈𝒆𝒅 𝒇𝒃𝒔𝒕𝒂𝒕𝒆 𝒔𝒖𝒄𝒄𝒆𝒔𝒔𝒇𝒖𝒍𝒍𝒚! 🌸
+app.serverError=🥺 𝑺𝒆𝒓𝒗𝒆𝒓 𝒆𝒓𝒓𝒐𝒓 𝒐𝒄𝒄𝒖𝒓𝒓𝒆𝒅, 𝒑𝒍𝒆𝒂𝒔𝒆 𝒕𝒓𝒚 𝒂𝒈𝒂𝒊𝒏 𝒍𝒂𝒕𝒆𝒓!
