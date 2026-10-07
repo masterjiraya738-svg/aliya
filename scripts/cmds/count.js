@@ -1,6 +1,7 @@
 const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs-extra");
 const path = require("path");
+const axios = require("axios");
 
 function cleanName(name) {
   if (!name) return "Facebook User";
@@ -10,86 +11,133 @@ function cleanName(name) {
   return cleaned.length === 0 ? "Regular User" : cleaned;
 }
 
+function formatTextLeaderboard(arraySort, totalMessages, page, totalPages) {
+  let textMsg = `📊 ══ [ 𝐀𝐋𝐈𝐘𝐀 𝐒𝐘𝐒𝐓𝐄𝐌 ] ══ 📊\n`;
+  textMsg += `✨ 𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐒𝐒𝐀𝐆𝐄 𝐋𝐄𝐀𝐃𝐄𝐑𝐁𝐎𝐀𝐑𝐃 ✨\n`;
+  textMsg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
+  textMsg += `📖 𝐏𝐚𝐠𝐞: ${page}/${totalPages} | 💬 𝐓𝐨𝐭𝐚𝐥 𝐌𝐬𝐠𝐬: ${totalMessages.toLocaleString()}\n`;
+  textMsg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  for (const item of arraySort) {
+    const formattedNum = item.stt < 10 ? '0' + item.stt : item.stt;
+    let badge = `[#${formattedNum}]`;
+    if (item.stt === 1) badge = "🥇 [#01]";
+    else if (item.stt === 2) badge = "🥈 [#02]";
+    else if (item.stt === 3) badge = "🥉 [#03]";
+
+    textMsg += `${badge} ${cleanName(item.name)}\n   └─ 💬 ${item.count.toLocaleString()} msgs\n`;
+  }
+
+  textMsg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+  textMsg += `💡 Reply with a page number (1-${totalPages}) to jump.\n`;
+  textMsg += `⚙️ 𝐀𝐥𝐢𝐲𝐚 𝐒𝐲𝐬𝐭𝐞𝐦 • 𝐀𝐥𝐥 𝐑𝐢𝐠𝐡𝐭𝐬 𝐑𝐞𝐬𝐞𝐫𝐯𝐞𝐝`;
+  return textMsg;
+}
+
 async function renderLeaderboardImage(topList, totalMessages, page, totalPages) {
   const width = 1200;
   const height = 1500;
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext("2d");
 
-  // Background
-  const gradient = ctx.createLinearGradient(0, 0, width, height);
-  gradient.addColorStop(0, "#080614");
-  gradient.addColorStop(0.5, "#0d0a26");
-  gradient.addColorStop(1, "#05030a");
-  ctx.fillStyle = gradient;
+  // Load custom background image
+  const bgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUNGlE3waNRvMoXBQsSbNSo-_uoKXk2jguPC3syDJprbUD185WhwpqNkU2&s=10";
+  try {
+    const bgBuffer = (await axios.get(bgUrl, { responseType: "arraybuffer", timeout: 8000 })).data;
+    const bgImg = await loadImage(bgBuffer);
+    ctx.drawImage(bgImg, 0, 0, width, height);
+  } catch (e) {
+    const gradient = ctx.createLinearGradient(0, 0, width, height);
+    gradient.addColorStop(0, "#080614");
+    gradient.addColorStop(0.5, "#0d0a26");
+    gradient.addColorStop(1, "#05030a");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, height);
+  }
+
+  // 50% Semi-transparent dark overlay for background visibility
+  ctx.fillStyle = "rgba(10, 8, 20, 0.65)";
   ctx.fillRect(0, 0, width, height);
 
-  // Outer Border
-  ctx.strokeStyle = "#8b5cf6";
+  // Outer Neon Glow Border
+  ctx.strokeStyle = "#a855f7";
+  ctx.shadowColor = "#c084fc";
+  ctx.shadowBlur = 15;
   ctx.lineWidth = 6;
   ctx.strokeRect(30, 30, width - 60, height - 60);
+  ctx.shadowBlur = 0;
+
+  // Header System Name (Aliya System)
+  ctx.fillStyle = "#e879f9";
+  ctx.font = "bold 32px Arial, sans-serif";
+  ctx.textAlign = "center";
+  ctx.shadowColor = "#f43f5e";
+  ctx.shadowBlur = 10;
+  ctx.fillText("❖ 𝐀𝐋𝐈𝐘𝐀 𝐒𝐘𝐒𝐓𝐄𝐌 ❖", width / 2, 80);
 
   // Header Title
   ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 52px Arial, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText("GROUP MESSAGE LEADERBOARD", width / 2, 110);
+  ctx.font = "bold 50px Arial, sans-serif";
+  ctx.shadowColor = "#c084fc";
+  ctx.shadowBlur = 18;
+  ctx.fillText("MESSAGE LEADERBOARD", width / 2, 135);
+  ctx.shadowBlur = 0;
 
-  ctx.fillStyle = "#a855f7";
-  ctx.font = "bold 28px Arial, sans-serif";
-  ctx.fillText("✿ Member Activity Ranking ✿", width / 2, 155);
-
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "22px Arial, sans-serif";
-  ctx.fillText(`Page ${page}/${totalPages}  •  Total Messages: ${totalMessages}`, width / 2, 195);
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "bold 24px Arial, sans-serif";
+  ctx.fillText(`Page ${page}/${totalPages}  •  Total Messages: ${totalMessages.toLocaleString()}`, width / 2, 180);
 
   // Divider Line
-  ctx.strokeStyle = "#334155";
+  ctx.strokeStyle = "rgba(168, 85, 247, 0.5)";
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(60, 220);
-  ctx.lineTo(width - 60, 220);
+  ctx.moveTo(60, 210);
+  ctx.lineTo(width - 60, 210);
   ctx.stroke();
 
-  // Single Column List Layout (12 Users per page)
+  // List Rows
   const startX = 80;
-  const startY = 270;
-  const rowHeight = 85;
+  const startY = 250;
+  const rowHeight = 88;
 
   for (let index = 0; index < topList.length; index++) {
     const item = topList[index];
     const y = startY + index * rowHeight;
 
-    // Diamond Glow Rank Badge (Option 4)
+    // Row Background Box
+    ctx.fillStyle = "rgba(15, 23, 42, 0.55)";
+    ctx.fillRect(startX, y, width - (startX * 2), 70);
+
     const formattedNum = item.stt < 10 ? '0' + item.stt : item.stt;
-    let rankText = `◈ ${formattedNum}`;
+    let rankText = `#${formattedNum}`;
     let rankColor = "#94a3b8";
 
     if (item.stt === 1) {
-      rankText = "🥇 ◈ 01";
+      rankText = "🥇 #01";
       rankColor = "#fbbf24";
     } else if (item.stt === 2) {
-      rankText = "🥈 ◈ 02";
-      rankColor = "#cbd5e1";
+      rankText = "🥈 #02";
+      rankColor = "#e2e8f0";
     } else if (item.stt === 3) {
-      rankText = "🥉 ◈ 03";
-      rankColor = "#d97706";
+      rankText = "🥉 #03";
+      rankColor = "#f97316";
     }
 
     // Rank Text
     ctx.textAlign = "left";
     ctx.fillStyle = rankColor;
-    ctx.font = "bold 26px Arial, sans-serif";
-    ctx.fillText(rankText, startX, y + 10);
+    ctx.font = "bold 28px Arial, sans-serif";
+    ctx.fillText(rankText, startX + 25, y + 45);
 
     // Profile Avatar Drawing
-    const avatarX = startX + 160;
-    const avatarY = y;
+    const avatarX = startX + 175;
+    const avatarY = y + 35;
     const avatarRadius = 26;
     const avatarUrl = `https://graph.facebook.com/${item.uid}/picture?width=500&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 
     try {
-      const img = await loadImage(avatarUrl);
+      const imgData = (await axios.get(avatarUrl, { responseType: "arraybuffer", timeout: 5000 })).data;
+      const img = await loadImage(imgData);
       ctx.save();
       ctx.beginPath();
       ctx.arc(avatarX, avatarY, avatarRadius, 0, Math.PI * 2);
@@ -104,7 +152,7 @@ async function renderLeaderboardImage(topList, totalMessages, page, totalPages) 
       ctx.fill();
     }
 
-    // Avatar Border Glow
+    // Avatar Border
     ctx.strokeStyle = rankColor;
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -115,40 +163,35 @@ async function renderLeaderboardImage(topList, totalMessages, page, totalPages) 
     ctx.fillStyle = "#f8fafc";
     ctx.font = "bold 24px Arial, sans-serif";
     const displayName = cleanName(item.name);
-    const truncatedName = displayName.length > 22 ? displayName.substring(0, 22) + "..." : displayName;
-    ctx.fillText(truncatedName, avatarX + 45, y + 8);
+    const truncatedName = displayName.length > 20 ? displayName.substring(0, 20) + "..." : displayName;
+    ctx.fillText(truncatedName, avatarX + 45, y + 43);
 
     // Message Count
     ctx.textAlign = "right";
     ctx.fillStyle = "#38bdf8";
     ctx.font = "bold 24px Arial, sans-serif";
-    ctx.fillText(`${item.count.toLocaleString()} msgs`, width - startX, y + 8);
-
-    // Row Separator
-    ctx.strokeStyle = "#1e293b";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(startX, y + 30);
-    ctx.lineTo(width - startX, y + 30);
-    ctx.stroke();
+    ctx.fillText(`${item.count.toLocaleString()} msgs`, width - startX - 25, y + 43);
   }
 
-  // Footer Info
-  ctx.strokeStyle = "#334155";
+  // Footer
+  ctx.strokeStyle = "rgba(168, 85, 247, 0.5)";
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(60, height - 130);
-  ctx.lineTo(width - 60, height - 130);
+  ctx.moveTo(60, height - 110);
+  ctx.lineTo(width - 60, height - 110);
   ctx.stroke();
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#e2e8f0";
-  ctx.font = "22px Arial, sans-serif";
-  ctx.fillText(`Reply with a number (1-${totalPages}) to jump to that page`, width / 2, height - 85);
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "20px Arial, sans-serif";
+  ctx.fillText(`Reply with a number (1-${totalPages}) to jump to that page`, width / 2, height - 70);
 
-  ctx.fillStyle = "#c084fc";
+  ctx.fillStyle = "#e879f9";
   ctx.font = "bold 24px Arial, sans-serif";
-  ctx.fillText(`✦ MAINTAINER — Mr.King ☠️✌🏼 ✦`, width / 2, height - 45);
+  ctx.shadowColor = "#f43f5e";
+  ctx.shadowBlur = 8;
+  ctx.fillText(`• 𝐀𝐥𝐢𝐲𝐚 𝐒𝐲𝐬𝐭𝐞𝐦 •`, width / 2, height - 35);
+  ctx.shadowBlur = 0;
 
   const cachePath = path.join(__dirname, "cache", `count_${Date.now()}.png`);
   if (!fs.existsSync(path.dirname(cachePath))) fs.mkdirSync(path.dirname(cachePath), { recursive: true });
@@ -161,12 +204,12 @@ module.exports = {
   config: {
     name: "count",
     aliases: ["c"],
-    version: "3.2.0",
-    author: "Mr.King",
+    version: "3.5.0",
+    author: "Mr.King / Aliya System",
     countDown: 5,
     role: 0,
     category: "box chat",
-    shortDescription: "Check group message rankings with avatar banner",
+    shortDescription: "Check group message rankings with banner image",
     guide: { en: "{pn} -> Your rank | {pn} all -> Full rankings | {pn} @tag -> Tagged rank" }
   },
 
@@ -189,7 +232,7 @@ module.exports = {
     if (!args[0]) {
       const findUser = arraySort.find(item => item.uid == senderID);
       if (!findUser) return message.reply("❌ | No message data found for you yet.");
-      return message.reply(`>🎀 ( 𝐘𝐨𝐮𝐫 𝐒𝐭𝐚𝐭𝐬 )\n━━━━━━━━━━━━━━━━━━\n👑 | 𝐑𝐚𝐧𝐤: #${findUser.stt}\n💬 | 𝐌𝐞𝐬𝐬𝐚𝐠𝐞𝐬: ${findUser.count}\n━━━━━━━━━━━━━━━━━━\n• 𝐌𝒓.𝐊𝐢𝐧𝐠 𝐒𝐲𝐬𝐭𝐞𝐦🐉`);
+      return message.reply(`> 🌺 ( 𝐘𝐨𝐮𝐫 𝐒𝐭𝐚𝐭𝐬 )\n━━━━━━━━━━━━━━━━━━\n👑 | 𝐑𝐚𝐧𝐤: #${findUser.stt}\n💬 | 𝐌𝐞𝐬𝐬𝐚𝐠𝐞𝐬: ${findUser.count}\n━━━━━━━━━━━━━━━━━━\n• 𝐀𝐥𝐢𝐲𝐚 𝐒𝐲𝐬𝐭𝐞𝐦 🌸`);
     }
 
     if (args[0].toLowerCase() === "all" || !isNaN(args[0])) {
@@ -202,39 +245,60 @@ module.exports = {
       const topList = arraySort.slice((page - 1) * itemsPerPage, page * itemsPerPage);
       const totalMessages = arraySort.reduce((acc, cur) => acc + cur.count, 0);
 
-      const imgPath = await renderLeaderboardImage(topList, totalMessages, page, totalPages);
+      try {
+        const imgPath = await renderLeaderboardImage(topList, totalMessages, page, totalPages);
 
-      return message.reply({
-        attachment: fs.createReadStream(imgPath)
-      }, (err, info) => {
-        if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+        return message.reply({
+          attachment: fs.createReadStream(imgPath)
+        }, (err, info) => {
+          if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
 
-        if (!err && info) {
-          global.GoatBot.onReply.set(info.messageID, {
-            commandName: "count",
-            messageID: info.messageID,
-            author: event.senderID,
-            totalPages: totalPages,
-            arraySort: arraySort,
-            totalMessages: totalMessages
-          });
+          if (!err && info) {
+            global.GoatBot.onReply.set(info.messageID, {
+              commandName: "count",
+              messageID: info.messageID,
+              author: event.senderID,
+              totalPages: totalPages,
+              arraySort: arraySort,
+              totalMessages: totalMessages
+            });
 
-          setTimeout(() => {
-            if (api.unsendMessage) api.unsendMessage(info.messageID);
-          }, 20000);
-        }
-      });
+            setTimeout(() => {
+              if (api.unsendMessage) api.unsendMessage(info.messageID);
+            }, 20000);
+          }
+        });
+      } catch (err) {
+        // Fallback to text message if image generation fails
+        const textMsg = formatTextLeaderboard(topList, totalMessages, page, totalPages);
+        return message.reply(textMsg, (err, info) => {
+          if (!err && info) {
+            global.GoatBot.onReply.set(info.messageID, {
+              commandName: "count",
+              messageID: info.messageID,
+              author: event.senderID,
+              totalPages: totalPages,
+              arraySort: arraySort,
+              totalMessages: totalMessages
+            });
+
+            setTimeout(() => {
+              if (api.unsendMessage) api.unsendMessage(info.messageID);
+            }, 20000);
+          }
+        });
+      }
     }
 
     if (event.mentions && Object.keys(event.mentions).length > 0) {
-      let msg = `>🎀 ( 𝐔𝐬𝐞𝐫 𝐒𝐭𝐚𝐭𝐬 )\n━━━━━━━━━━━━━━━━━━`;
+      let msg = `> 🌺 ( 𝐔𝐬𝐞𝐫 𝐒𝐭𝐚𝐭𝐬 )\n━━━━━━━━━━━━━━━━━━`;
       for (const id in event.mentions) {
         const findUser = arraySort.find(item => item.uid == id);
         if (findUser) {
           msg += `\n👤 | ${findUser.name}: Rank #${findUser.stt} (${findUser.count} msgs)`;
         }
       }
-      return message.reply(msg + `\n━━━━━━━━━━━━━━━━━━\n• 𝐌𝒓.𝐊𝐢𝐧𝐠 𝐎𝐩𝐞𝐫𝐚𝐭𝐢𝐨𝐧🐉`);
+      return message.reply(msg + `\n━━━━━━━━━━━━━━━━━━\n• 𝐀𝐥𝐢𝐲𝐚 𝐒𝐲𝐬𝐭𝐞𝐦 🌸`);
     }
   },
 
@@ -247,29 +311,51 @@ module.exports = {
     const itemsPerPage = 12;
     const topList = Reply.arraySort.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
-    const imgPath = await renderLeaderboardImage(topList, Reply.totalMessages, page, Reply.totalPages);
+    try {
+      const imgPath = await renderLeaderboardImage(topList, Reply.totalMessages, page, Reply.totalPages);
 
-    return message.reply({
-      attachment: fs.createReadStream(imgPath)
-    }, (err, info) => {
-      if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
-      if (api.unsendMessage) api.unsendMessage(Reply.messageID);
+      return message.reply({
+        attachment: fs.createReadStream(imgPath)
+      }, (err, info) => {
+        if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+        if (api.unsendMessage) api.unsendMessage(Reply.messageID);
 
-      if (!err && info) {
-        global.GoatBot.onReply.set(info.messageID, {
-          commandName: "count",
-          messageID: info.messageID,
-          author: event.senderID,
-          totalPages: Reply.totalPages,
-          arraySort: Reply.arraySort,
-          totalMessages: Reply.totalMessages
-        });
+        if (!err && info) {
+          global.GoatBot.onReply.set(info.messageID, {
+            commandName: "count",
+            messageID: info.messageID,
+            author: event.senderID,
+            totalPages: Reply.totalPages,
+            arraySort: Reply.arraySort,
+            totalMessages: Reply.totalMessages
+          });
 
-        setTimeout(() => {
-          if (api.unsendMessage) api.unsendMessage(info.messageID);
-        }, 20000);
-      }
-    });
+          setTimeout(() => {
+            if (api.unsendMessage) api.unsendMessage(info.messageID);
+          }, 20000);
+        }
+      });
+    } catch (err) {
+      const textMsg = formatTextLeaderboard(topList, Reply.totalMessages, page, Reply.totalPages);
+      return message.reply(textMsg, (err, info) => {
+        if (api.unsendMessage) api.unsendMessage(Reply.messageID);
+
+        if (!err && info) {
+          global.GoatBot.onReply.set(info.messageID, {
+            commandName: "count",
+            messageID: info.messageID,
+            author: event.senderID,
+            totalPages: Reply.totalPages,
+            arraySort: Reply.arraySort,
+            totalMessages: Reply.totalMessages
+          });
+
+          setTimeout(() => {
+            if (api.unsendMessage) api.unsendMessage(info.messageID);
+          }, 20000);
+        }
+      });
+    }
   },
 
   onChat: async ({ usersData, threadsData, event }) => {
@@ -292,4 +378,3 @@ module.exports = {
     await threadsData.set(threadID, members, "members");
   }
 };
-											  
